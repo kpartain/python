@@ -86,7 +86,7 @@ def foobar():
 print(b)
 foobar()
 print(b)
-#
+#500, 500, 300, 500
 
 #12
 b = 500
@@ -98,7 +98,7 @@ def foobar():
 print(b)
 foobar()
 print(b)
-#
+# 500 500 300 500
 
 #13
 b = 500
@@ -110,7 +110,7 @@ def foobar():
 print(b)
 b=foobar()
 print(b)
-
+#500 500 300 300
 
 #14
 def foo():
@@ -120,7 +120,7 @@ def foo():
 def bar():
     print(3)
 foo()
-#
+#1 3 2
 
 #15
 def foo():
@@ -133,4 +133,4 @@ def bar():
     return 5
 y = foo()
 print(y)
-#
+#1 3 5 10
