@@ -1,12 +1,14 @@
 //create a function that, given a string returns the acronym
 //first letter of each word capitalized
-var testString = "this is a test";
-var testStringSpace = " oh no, a Space";
+var testString = "this is a - test";
+var testStringSpace = " oh no, a - Space";
 function stringToAcronym(str){
     var newString = "";
     //this does not account for index 0 being a non-alphabet character
     for(var i = 0; i < testString.length; i++) {
-        if(str[i] == " ") {
+        if(i == 0 && str[0] != " ") {
+            newString += str[0].toUpperCase();
+        }else if(str[i] == " ") {
             newString += str[i+1].toUpperCase();
             i++;
         }
