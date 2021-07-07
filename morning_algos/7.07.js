@@ -89,4 +89,5 @@ var str6 = "a3bcd3"; // "aaabbcddd"
 var return6 = stringDecode(str6);
 console.log(return6);
 
+//need to consider if there is a 10, 11, 100, etc. continue checking until not a number
 
