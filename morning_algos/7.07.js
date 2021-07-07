@@ -48,11 +48,14 @@ var str3 = "aaaabbcddda"; //return a4b2c1d3a
 function stringDecode(str) {
     var returnString = "";
     var hasANumber = false;
-    for (var i = 0; i < str.length; i++) {
+    var i = 0;
+    while(hasANumber == false && i < str.length) {
         if (!isNaN(str.charAt(i))) {
             hasANumber = true;
         }
+        i++;   
     }
+        
     //if the string does not have a number, return string is string, return it there
     if (hasANumber == false) {
         returnString = str;
