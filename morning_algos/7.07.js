@@ -55,11 +55,9 @@ function stringDecode(str) {
         }
         i++;   
     }
-        
-    //if the string does not have a number, return string is string, return it there
+    //if the string does not have a number, return string is string
     if (hasANumber == false) {
         returnString = str;
-        return returnString;
     //otherwise if it does have a number...
     } else {
         for (var i = 0; i < str.length; i++) {
