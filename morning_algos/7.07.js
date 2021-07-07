@@ -53,16 +53,14 @@ function stringDecode(str) {
             hasANumber = true;
         }
     }
-    //if the string does not have a number, return string is string
+    //if the string does not have a number, return string is string, return it there
     if (hasANumber == false) {
         returnString = str;
         return returnString;
-    //otherwise if it does have a string 
+    //otherwise if it does have a number...
     } else {
-        var letter = "";
         for (var i = 0; i < str.length; i++) {
             var thisChar = str.charAt(i);
-            letter = thisChar;
             var nextChar = str.charAt(i + 1);
             //if the next character is a number, add it that many times
             if (!isNaN(nextChar)) {
