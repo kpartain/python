@@ -50,21 +50,52 @@ console.log(isPalindrome(str4));
     All the substrings of "abc" are:
     a, ab, abc, b, bc, c
 */
+//references https://duncan-mcardle.medium.com/leetcode-problem-5-longest-palindromic-substring-javascript-9c7c7cea0003
+//was not able to do without brute force
+function longestPalindromicSubstring(str) {
+    let longestPalLength = 0;
+    let longestPalLeft = 0;
+    let longestPalRight = 0;
 
+    var getLongestPalindrome = function (leftPosition, rightPosition) {
+        while (
+            leftPosition >= 0 &&
+            rightPosition < str.length &&
+            str[leftPosition] === str[rightPosition]
+        ) {
+            leftPosition--;
+            rightPosition++;
+        }
+        if (rightPosition - leftPosition > longestPalLength) {
+            longestPalLeft = leftPosition + 1;
+            longestPalRight = rightPosition - 1;
+            longestPalLength = longestPalRight - longestPalLeft + 1;
+        }
+    };
+    for (let i = 0; i < str.length; i++) {
+        getLongestPalindrome(i, i + 1);
+        getLongestPalindrome(i, i);
+        if ((str.length - i) * 2 < longestPalLength) {
+            break;
+        }
+    }
+    return str.slice(longestPalLeft, longestPalRight + 1);
+}
 // const { isPalindrome } = require("./isPalindrome");
 
-// const str1 = "what up, daddy-o?";
+const str5 = "what up, daddy-o?";
 // const expected1 = "dad";
+console.log(longestPalindromicSubstring(str5))
 
-// const str2 = "uh, not much";
+const str6 = "uh, not much";
 // const expected2 = "u";
+console.log(longestPalindromicSubstring(str6))
 
-// const str3 = "Yikes! my favorite racecar erupted!";
+const str7 = "Yikes! my favorite racecar erupted!";
 // const expected3 = "e racecar e";
+console.log(longestPalindromicSubstring(str7))
 
-// const str4 = "";
+const str8 = "";
 // const expected4 = false;
+console.log(longestPalindromicSubstring(str8))
 
-function longestPalindromicSubstring(str) {
-
-}
