@@ -79,7 +79,14 @@ function longestPalindromicSubstring(str) {
             break;
         }
     }
-    return str.slice(longestPalLeft, longestPalRight + 1);
+    if(str=="") {
+        return false
+    }else if(longestPalLength == 0 ) {
+        return str[0];
+    } else {
+      return str.slice(longestPalLeft, longestPalRight + 1);  
+    }
+    
 }
 // const { isPalindrome } = require("./isPalindrome");
 
