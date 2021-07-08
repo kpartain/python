@@ -1,4 +1,7 @@
-# import this 
+class SLNode:
+    def __init__(self, val):
+        self.value = val
+        self.next = None
 
 class SList:
         def __init__(self):
@@ -8,29 +11,53 @@ class SList:
             new_node.next = self.head
             self.head = new_node
             return self
-        def print_values(self):
-            runner = self.head
-            while (runner != None):
-                print(runner.value)
-            runner = runner.next
-            return self
-        def add_to_back(self, val):
-            if self.head == None:# if the list is empty
-                self.add_to_front(val)# run the add_to_front method
-                return self
-            new_node = SLNode(val)
-            runner = self.head
-            while (runner.next != None):
-                runner = runner.next
-            runner.next = new_node# increment the runner to the next node in the list
-            return self# return self to allow for chaining
-class SLNode:
-    def __init__(self, val):
-        self.value = val
-        self.next = None
 
+        def add_to_back(self, val):
+            new_node = SLNode(val)
+            if self.head is None:
+                self.head = new_node
+                return
+            last = self.head
+            while(last.next):
+                last = last.next
+            last.next = new_node
+            return self
+
+        def remove_from_front(self):
+            #in progress, optional
+            return self
+
+        def remove_from_back(self):
+            #in progress, optional
+            return self
+
+        def remove_val(self, val):
+            head_val = self.head
+            if head_val is not None:
+                if head_val.value == val:
+                    self.head = head_val.next
+                    head_val = None
+                    return
+            while head_val is not None:
+                if head_val.data == val:
+                    break
+                prev = head_val
+                head_val = head_val.next
+            if head_val is None:
+                return
+            prev.next = head_val.next
+            head_val = None
+            return self
+
+        def insert_at(self, val, n):
+            #in progress, optional
+            return self
+
+        def print_values(self):
+            printval = self.head
+            while printval is not None:
+                print(printval.value)
+                printval = printval.next
+            return self
 my_list = SList()
-my_list.add_to_front("are")
-# .add_to_front("Linked lists")
-# .add_to_back("fun!")
-# .print_values()
+my_list.add_to_front("are").add_to_front("Linked lists").add_to_back("fun!").print_values()
