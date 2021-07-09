@@ -7,14 +7,12 @@
     height: 100vh;
     width: 100%;
 }
+.row{
+    display: block;
+}
 .box {
     width: 10vh;
     height: 10vh;
     display: inline-block;
-}
-.red {
-    background-color: red;
-}
-.black {
-    background-color: black;
+    background-color: aliceblue;
 }

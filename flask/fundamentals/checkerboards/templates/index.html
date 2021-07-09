@@ -15,9 +15,9 @@
                 <div class="row">
                 {% for x in range(0,width,1):%}
                     {% if (x % 2 == 0): %}
-                        <div class="box red">test</div>
+                        <div class="box" style="background-color: {{ color1 }};">test</div>
                     {% else %}
-                        <div class="box black">other</div>
+                        <div class="box" style="background-color: {{ color2 }};">other</div>
                     {% endif %}
                 {% endfor %}
                 </div>
@@ -25,9 +25,9 @@
                 <div class="row">
                 {% for x in range(0,width,1):%}
                     {% if (x % 2 == 0): %}
-                        <div class="box black">test</div>
+                        <div class="box" style="background-color: {{ color2 }};">test</div>
                     {% else %}
-                        <div class="box red">other</div>
+                        <div class="box" style="background-color: {{ color1 }};">other</div>
                     {% endif %}
                 {% endfor %}
                 </div>
