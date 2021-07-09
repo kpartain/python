@@ -8,17 +8,11 @@ def hello_world():
 def say_dojo():
     return 'Dojo!'
 @app.route('/say/<word>')
-def foo(word):
+def say_word(word):
     return "Hi" + word + "!"
-@app.route('')
-def foo():
-    return
-@app.route('')
-def foo():
-    return
-@app.route('')
-def foo():
-    return
+@app.route('/<number>/<word>')
+def say_word_x_times(number, word):
+    return word * int(number)
 #@app.route('/foo') any other routes    
 #def that_routes_foo():
     #return whatever
