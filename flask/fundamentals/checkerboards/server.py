@@ -5,16 +5,8 @@
 from flask import Flask, render_template  # Import Flask to allow us to create our app
 app = Flask(__name__)    # Create a new instance of the Flask class called 'app'
 @app.route('/')          # The '@' decorator associates this route with the function immediately following
-def eight_eight_default():
-    return render_template('index.html')
-# @app.route('/4')
-# def eight_four():
-#     return render_template('index.html', width=8, height=4)
-# @app.route('/<x>/<y>')
-# def x_by_y(x,y):
-#     width = int(x)
-#     height = int(y)
-#     return render_template('index.html', width=width, height=height)
+def hello_world():
+    return render_template('index.html')# Return the string 'Hello World!' as a response
 #@app.route('/foo') any other routes    
 #def that_routes_foo():
     #return whatever
