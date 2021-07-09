@@ -1,0 +1,16 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+#container{
+    height: 100vh;
+    width: 100vw;
+}
+.box {
+    background-color: #9FC5F8;
+    width: 30vh;
+    height: 30vh;
+    margin: 5vw 5vw;
+    display: inline-block;
+}

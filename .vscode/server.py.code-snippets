@@ -4,9 +4,9 @@
         "prefix": "server.py",
         "body": [
             "#if you don't have pipfile and pipfile.lock, run pipenv install flask",
-            "after, to boot your server:",
-            "enter into the shell <pipenv shell>",
-            "and then start the server <python server.py>",
+            "#after, to boot your server:",
+            "#enter into the shell <pipenv shell>",
+            "#and then start the server <python server.py>",
             "from flask import Flask  # Import Flask to allow us to create our app",
             "app = Flask(__name__)    # Create a new instance of the Flask class called 'app'",
             "@app.route('/')          # The '@' decorator associates this route with the function immediately following",
