@@ -10,10 +10,10 @@
 <body>
     <div id="container">
         {% block content %}
-        {% for y in range (0,10,1):%}
+        {% for y in range (0,height,1):%}
             {% if (y % 2 == 0)%}
                 <div class="row">
-                {% for x in range(0,10,1):%}
+                {% for x in range(0,width,1):%}
                     {% if (x % 2 == 0): %}
                         <div class="box red">test</div>
                     {% else %}
@@ -23,7 +23,7 @@
                 </div>
             {% else %}
                 <div class="row">
-                {% for x in range(0,10,1):%}
+                {% for x in range(0,width,1):%}
                     {% if (x % 2 == 0): %}
                         <div class="box black">test</div>
                     {% else %}
