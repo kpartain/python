@@ -24,9 +24,12 @@
         <section class="jumbotron text-center">
           <div class="container">
             <h1 class="jumbotron-heading">Dojo Fruits</h1>
-            <p>Please figure out how to display the images here...</p>
-
-            <p>
+              {% for fruit in fruits %}
+                <figure>
+                  <img src="../static/img/{{ fruit }}.png" alt={{ fruit }} height="100px"/>
+                  <figcaption>{{fruit}}</figcaption>
+                </figure>
+              {% endfor %}
               <a href="/" class="btn btn-primary my-2">Go back</a>
             </p>
           </div>
