@@ -10,8 +10,24 @@ def index():
 
 @app.route('/checkout', methods=['POST'])         
 def checkout():
-    print(request.form)
-    return render_template("checkout.html")
+    name = request.form.get('first_name') + " " + request.form.get('last_name')
+    items = int(request.form.get('strawberry')) + int(request.form.get('raspberry')) + int(request.form.get('apple'))
+    print("Charging", name, " for", items, "fruits.")
+    purchaseSummary = [
+        {'Strawberries': request.form.get('strawberry')},
+        {'Raspberries': request.form.get('raspberry')},
+        {'Apples': request.form.get('apple')}
+    ]
+    studentID = request.form.get('student_id')
+    if studentID == "":
+        studentID = "N/A"
+    userData = [
+        {'First Name': request.form.get('first_name')},
+        {'Last Name': request.form.get('last_name')},
+        {'Student ID': studentID}
+    ]
+
+    return render_template("checkout.html", purchaseSummary=purchaseSummary, userData = userData)
 
 @app.route('/fruits')         
 def fruits():

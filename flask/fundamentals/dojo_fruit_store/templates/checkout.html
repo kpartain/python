@@ -27,10 +27,10 @@
             <p class="lead text-muted">We ordered 5 items for you and charged your student account on March 23rd 2019 5:15:35 PM.</p>
           </div>
         </section>
-  
         <div class="album py-5 bg-light">
           <div class="container">
                 <h4 class="mb-3">You have ordered</h4>
+
                 <table class="table table-striped">
                     <thead>
                     <tr>
@@ -39,35 +39,26 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>Strawberry</td>
-                        <td>4</td>
-                    </tr>
-                    <tr>
-                        <td>Raspberry</td>
-                        <td>3</td>
-                    </tr>
-                    <tr>
-                        <td>Apple</td>
-                        <td>2</td>
-                    </tr>
+                        {% for dict_item in purchaseSummary: %}
+                            {% for key, value in dict_item.items() %}
+                                <tr>
+                                    <td>{{key}}</td>
+                                    <td>{{value}}</h2>
+                                </tr>
+                            {% endfor %}
+                        {% endfor %}
                     </tbody>
                 </table>
-  
                 <h4 class="mb-3">Your Information</h4>
                 <div class="row">
-                    <div class="col-md-6 mb-3">
-                        First Name: Michael
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        Last Name: Choi
-                    </div>
+                  {% for dict_item in userData: %}
+                      {% for key, value in dict_item.items() %}
+                          <div class="col-md-6 mb-3">   
+                            {{key}}: {{value}}
+                          </div>
+                      {% endfor %}
+                  {% endfor %}
                 </div>
-  
-                <div class="mb-3">
-                    Your Student ID: 123-456-7890
-                </div>
-              
                 <hr class="mb-4">
                 <a class="btn btn-primary btn-lg btn-block" href="/">Go Back</a>
             
