@@ -59,13 +59,21 @@ function moreEfficient(cents) {
         nickels: 0,
         pennies: 0,
     };
-    output["quarters"] = Math.floor(cents/25),
-    cents = cents % 25; 
-    output["dimes"] = Math.floor(cents/10),
-    cents = cents % 10; 
-    output["nickels"] = Math.floor(cents/5),
-    cents = cents % 5; 
-    output["pennies"] = Math.floor(cents)
-    return output
+    (output["quarters"] = Math.floor(cents / 25)), (cents = cents % 25);
+    (output["dimes"] = Math.floor(cents / 10)), (cents = cents % 10);
+    (output["nickels"] = Math.floor(cents / 5)), (cents = cents % 5);
+    output["pennies"] = Math.floor(cents);
+    return output;
 }
 console.log(moreEfficient(173));
+
+//changing from bracket to dot increased efficacy
+function moreEfficient2(cents) {
+    var output = {};
+    (output.quarters = Math.floor(cents / 25)), (cents = cents % 25);
+    (output.dimes = Math.floor(cents / 10)), (cents = cents % 10);
+    (output.nickels = Math.floor(cents / 5)), (cents = cents % 5);
+    output.pennies = Math.floor(cents);
+    return output;
+}
+console.log(moreEfficient2(173));
