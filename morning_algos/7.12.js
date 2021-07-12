@@ -28,14 +28,14 @@
     is 150 + 20 + 0 + 3 = 173.
 */
 
-function generateCoinChangeObject(cents){
+function generateCoinChangeObject(cents) {
     var output = {
         quarters: 0,
         dimes: 0,
         nickels: 0,
-        pennies: 0
-    }
-    while(cents - 25 >= 0) {
+        pennies: 0,
+    };
+    while (cents - 25 >= 0) {
         cents = cents - 25;
         output["quarters"]++;
     }
@@ -43,12 +43,12 @@ function generateCoinChangeObject(cents){
         cents = cents - 10;
         output["dimes"]++;
     }
-    while(cents - 5 >= 5) {
+    while (cents - 5 >= 5) {
         cents = cents - 5;
         output["nickels"]++;
     }
     output["pennies"] = cents;
     return output;
 }
-console.log(generateCoinChangeObject(272))
-console.log(generateCoinChangeObject(173))
+console.log(generateCoinChangeObject(272));
+console.log(generateCoinChangeObject(173));
