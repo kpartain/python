@@ -15,7 +15,7 @@ def initial_route():
     if 'myString' in session:
         pass
     else:
-        session['myString'] = []
+        session["myString"] = ""
     #this should have access to yourGold from Session
     return render_template('index.html')
 
