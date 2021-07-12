@@ -45,10 +45,10 @@ function generateCoinChangeObject(cents){
     }
     while(cents - 5 >= 5) {
         cents = cents - 5;
-        output["nickels"]++
+        output["nickels"]++;
     }
     output["pennies"] = cents;
-    return output
+    return output;
 }
 console.log(generateCoinChangeObject(272))
 console.log(generateCoinChangeObject(173))
