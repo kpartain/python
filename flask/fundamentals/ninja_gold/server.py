@@ -3,6 +3,7 @@
 #python server.py ..... start your server
 import random
 from flask import Flask, render_template, request, redirect, session
+from datetime import datetime
 app = Flask(__name__)
 app.secret_key = 'thisSecretKey_isJustForDemonstration'
 
@@ -23,6 +24,8 @@ def initial_route():
 def post_with_session_redirect():
     #determine how much money to give or take away
     value = 0
+    dateTimeObj = datetime.now()
+    timestampStr = dateTimeObj.strftime("%d-%b-%Y (%H:%M:%S.%f)")
     print(type(session['myString']))
     if request.form['building'] == 'farm':
         value = random.randint(10, 20)
@@ -39,14 +42,14 @@ def post_with_session_redirect():
         session["yourGold"] += value
     #redirect to localhost:5000/
     if value > 0:
-        thisString = "\nEarned " + str(value) + " golds from the " + request.form['building']
+        thisString = "\nEarned " + str(value) + " golds from the " + request.form['building'] + " " +  timestampStr
         session["myString"] += thisString
         print(session["myString"])
     elif value < 0:
-        thisString = "\nEntered a " + request.form['building'] + " and lost " + str(abs(value)) + " golds... Ouch!"
+        thisString = "\nEntered a " + request.form['building'] + " and lost " + str(abs(value)) + " golds... Ouch!" + " " + timestampStr
         session["myString"] += thisString
     else:
-        thisString = "\nEntered a " + request.form['building'] + " and didn't win or lose. Weird."
+        thisString = "\nEntered a " + request.form['building'] + " and didn't win or lose. Weird." + " " + timestampStr
         session["myString"] += thisString
     print(session["myString"])
     return redirect('/')
