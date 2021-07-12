@@ -13,3 +13,12 @@ body {
 #playarea{
     text-align: center;
 }
+
+#playarea > div {
+    border: 2px solid black;
+}
+
+textarea {
+    width: 90vw;
+    height: 20vh;
+}
