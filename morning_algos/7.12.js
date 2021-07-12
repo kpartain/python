@@ -50,7 +50,6 @@ function generateCoinChangeObject(cents) {
     output["pennies"] = cents;
     return output;
 }
-console.log(generateCoinChangeObject(272));
 console.log(generateCoinChangeObject(173));
 
 function moreEfficient(cents) {
@@ -69,5 +68,4 @@ function moreEfficient(cents) {
     output["pennies"] = Math.floor(cents)
     return output
 }
-console.log(moreEfficient(272));
 console.log(moreEfficient(173));
