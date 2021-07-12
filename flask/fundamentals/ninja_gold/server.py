@@ -12,7 +12,10 @@ def initial_route():
         session["yourGold"] = session["yourGold"]
     else:
         session["yourGold"] = 0
-    print(session["myString"])
+    if 'myString' in session:
+        pass
+    else:
+        session['myString'] = []
     #this should have access to yourGold from Session
     return render_template('index.html')
 
@@ -20,11 +23,10 @@ def initial_route():
 def post_with_session_redirect():
     #determine how much money to give or take away
     value = 0
-    session["myString"] = ""
+    print(type(session['myString']))
     if request.form['building'] == 'farm':
         value = random.randint(10, 20)
         session["yourGold"] += value
-        session["myString"] = "Earned"
         print(session["myString"])
     elif request.form['building'] == 'cave':
         value = random.randint(5,10)
@@ -37,12 +39,16 @@ def post_with_session_redirect():
         session["yourGold"] += value
     #redirect to localhost:5000/
     if value > 0:
-        session["myString"] = "Earned " + str(value) + " golds from the " + request.form['building']
+        thisString = "\nEarned " + str(value) + " golds from the " + request.form['building']
+        session["myString"] += thisString
         print(session["myString"])
     elif value < 0:
-        session["myString"] = "Entered a " + request.form['building'] + " and lost " + str(abs(value)) + " golds... Ouch!"
+        thisString = "\nEntered a " + request.form['building'] + " and lost " + str(abs(value)) + " golds... Ouch!"
+        session["myString"] += thisString
     else:
-        session["myString"] =  "Entered a " + request.form['building'] + " and didn't win or lose. Weird."
+        thisString = "\nEntered a " + request.form['building'] + " and didn't win or lose. Weird."
+        session["myString"] += thisString
+    print(session["myString"])
     return redirect('/')
 
 #this must be below ALL routes
