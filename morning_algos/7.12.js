@@ -52,3 +52,22 @@ function generateCoinChangeObject(cents) {
 }
 console.log(generateCoinChangeObject(272));
 console.log(generateCoinChangeObject(173));
+
+function moreEfficient(cents) {
+    var output = {
+        quarters: 0,
+        dimes: 0,
+        nickels: 0,
+        pennies: 0,
+    };
+    output["quarters"] = Math.floor(cents/25),
+    cents = cents % 25; 
+    output["dimes"] = Math.floor(cents/10),
+    cents = cents % 10; 
+    output["nickels"] = Math.floor(cents/5),
+    cents = cents % 5; 
+    output["pennies"] = Math.floor(cents)
+    return output
+}
+console.log(moreEfficient(272));
+console.log(moreEfficient(173));
