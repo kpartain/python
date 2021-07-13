@@ -46,18 +46,9 @@ class SLList {
 
     addToFront(value) {
         var newNode = new Node(value)
-        if(this.head == null) {
-            this.head = newNode;
-            return this;
-        } else {
-            newNode.next = this.head;
-            this.head = newNode;
-            return this;
-        }
-        //vs
-        // newNode.next = this.head;
-        // this.head = newNode;
-        // return this;
+        newNode.next = this.head;
+        this.head = newNode;
+        return this;
 
     }
 
@@ -80,23 +71,25 @@ class SLList {
 
     contains(value) {
         var returnBoolean = false;
-        console.log("value " + value)
-        console.log("thishead " + this.head.value)
+        console.log("contains(value)1 value: " + value)
+        console.log("contains(value)2 thishead: " + this.head.value)
         if(this.head.value == value) {
             console.log("inside if " + value)
             returnBoolean = true;
             return returnBoolean;
-        }
-        var currentNode = this.head;
-        while(currentNode.next != null) {
-            if(currentNode.head == value){
-                returnBoolean = true;
-            }
+        } else {
+            var currentNode = this.head;
+            while(currentNode.next != null) {
+                if(currentNode.value == value){
+                    returnBoolean = true;
+                }
             currentNode = currentNode.next;
-            console.log(currentNode);
+            console.log("inside while contains(value): " + currentNode);
+            }
+            console.log("return boolean " + returnBoolean)
+            return returnBoolean
         }
-        console.log("return boolean " + returnBoolean)
-        return returnBoolean
+        
     }
 }
 
@@ -105,13 +98,13 @@ var newList = new SLList();
 newList.addToBack(5).addToBack(1).addToFront(3);
 
 var contains5 = newList.contains(5);
-console.log("contains five: " + contains5)
+console.log("****Contains five: " + contains5)
 var contains5Expected = true;
 
 var contains2 = newList.contains(2);
-console.log("contains two: " + contains2)
+console.log("*****Contains two: " + contains2)
 var contains2Expected = false;
 
 var contains3 = newList.contains(3);
-console.log("Contains three: " + contains3)
+console.log("*****Contains three: " + contains3)
 var contains3Expected = true;
