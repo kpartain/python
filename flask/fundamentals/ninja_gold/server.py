@@ -17,8 +17,9 @@ def initial_route():
         pass
     else:
         session["myString"] = ""
+    thisUL = "<ul>" + str(session["myString"]) + "</ul>"
     #this should have access to yourGold from Session
-    return render_template('index.html')
+    return render_template('index.html', thisUL = thisUL)
 
 @app.route('/process_money', methods=['POST'])
 def post_with_session_redirect():
@@ -42,11 +43,11 @@ def post_with_session_redirect():
         session["yourGold"] += value
     #redirect to localhost:5000/
     if value > 0:
-        thisString = "\nEarned " + str(value) + " golds from the " + request.form['building'] + " " +  timestampStr
+        thisString = "<li class='green'>Earned " + str(value) + " golds from the " + request.form['building'] + " " +  timestampStr + "</li>"
         session["myString"] += thisString
         print(session["myString"])
     elif value < 0:
-        thisString = "\nEntered a " + request.form['building'] + " and lost " + str(abs(value)) + " golds... Ouch!" + " " + timestampStr
+        thisString = "<li class='red'>Entered a " + request.form['building'] + " and lost " + str(abs(value)) + " golds... Ouch!" + " " + timestampStr + "</li>"
         session["myString"] += thisString
     else:
         thisString = "\nEntered a " + request.form['building'] + " and didn't win or lose. Weird." + " " + timestampStr

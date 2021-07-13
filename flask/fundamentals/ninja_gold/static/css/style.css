@@ -22,3 +22,18 @@ textarea {
     width: 90vw;
     height: 20vh;
 }
+.red {
+    color: red;
+}
+.green {
+    color: green;
+}
+#activities {
+    width: 90vw;
+    height:20vh;
+    border: 2px solid black;
+    overflow: scroll;
+}
+ul {
+    list-style: none;
+}

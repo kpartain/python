@@ -71,9 +71,11 @@
             </div>
             <div class="mx-5">
                 <h2>Activities</h2>
-                <textarea id="textarea">
-                    {{ session["myString"] }}
-                </textarea>
+                <div id="activities">
+                   {{ thisUL|safe }} 
+                </div>
+                
+                
             </div>
         </div>
     </body>
