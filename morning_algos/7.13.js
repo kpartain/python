@@ -56,14 +56,11 @@ class SLList {
         var newLastNode = new Node(value)
         if (this.head == null){
             this.head = newLastNode;
-            console.log(newLastNode)
-            console.log(this.head)
             return this
         }
         var currentNode = this.head;
         while (currentNode.next != null) {
             currentNode = currentNode.next;
-            console.log(currentNode);
             }
         currentNode.next = newLastNode;
         return this;
@@ -79,12 +76,12 @@ class SLList {
             return returnBoolean;
         } else {
             var currentNode = this.head;
-            while(currentNode.next != null) {
+            while(currentNode.next != null && returnBoolean == false) {
                 if(currentNode.value == value){
                     returnBoolean = true;
                 }
             currentNode = currentNode.next;
-            console.log("inside while contains(value): " + currentNode);
+            console.log("inside while contains(value): " + currentNode.value);
             }
             console.log("return boolean " + returnBoolean)
             return returnBoolean
