@@ -68,10 +68,10 @@ class SLList {
 
     contains(value) {
         var returnBoolean = false;
-        console.log("contains(value)1 value: " + value)
-        console.log("contains(value)2 thishead: " + this.head.value)
+        console.log("Value to match: " + value)
+        console.log("Initial this head value: " + this.head.value)
         if(this.head.value == value) {
-            console.log("inside if " + value)
+            console.log("If value is head: (value)" + value)
             returnBoolean = true;
             return returnBoolean;
         } else {
@@ -81,7 +81,7 @@ class SLList {
                     returnBoolean = true;
                 }
             currentNode = currentNode.next;
-            console.log("inside while contains(value): " + currentNode.value);
+            console.log("inside while contains(value): current node value: " + currentNode.value);
             }
             console.log("return boolean " + returnBoolean)
             return returnBoolean
