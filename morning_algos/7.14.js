@@ -69,6 +69,17 @@ class SLList {
     }
 
     removeBack() {
+        //if we have an empty list
+        if(this.head == null){
+            return false;
+        }
+        //if we only have a head
+        var runner = this.head;
+        if(runner.next == null) {
+            this.head = null;
+            return this;
+        }
+        //otherwise if we have a head and at least one child node
         var runner = this.head;
         var runnerNext = runner.next
         while(runnerNext != null) {
