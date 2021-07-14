@@ -70,14 +70,13 @@ class SLList {
 
     removeBack() {
         var runner = this.head;
-        while(runner.next != null) {
-            console.log("before")
-            console.log(runner);
-            runner = runner.next;
-            console.log("after")
-            console.log(runner);
+        var runnerNext = runner.next
+        while(runnerNext != null) {
+            runnerNext = runnerNext.next
+            if(runnerNext != null) {
+                runner = runnerNext;
+            }
         }
-        runner.value = null;
         runner.next = null;
     }
 }
