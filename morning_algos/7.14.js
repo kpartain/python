@@ -82,11 +82,9 @@ class SLList {
         //otherwise if we have a head and at least one child node
         var runner = this.head;
         var runnerNext = runner.next
-        while(runnerNext != null) {
-            runnerNext = runnerNext.next
-            if(runnerNext != null) {
-                runner = runnerNext;
-            }
+        while(runnerNext.next != null) {
+            runner = runnerNext;
+            runnerNext = runnerNext.next; 
         }
         runner.next = null;
     }
