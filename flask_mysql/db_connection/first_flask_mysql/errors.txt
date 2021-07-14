@@ -1,0 +1,782 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Try the new cross-platform PowerShell https://aka.ms/pscore6
+
+PS C:\Users\data\Desktop\python\flask_mysql\db_connection\first_flask_mysql> pipenv install flask PyMySQL
+Creating a virtualenv for this project...
+Pipfile: C:\Users\data\Desktop\python\flask_mysql\db_connection\first_flask_mysql\Pipfile
+Using C:/Users/data/AppData/Local/Programs/Python/Python39/python.exe (3.9.5) to create virtualenv...
+[ ===] Creating virtual environment...created virtual environment CPython3.9.5.final.0-64 in 676ms
+  creator CPython3Windows(dest=C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf, clear=False, no_vcs_ignore=False, global=False)
+  seeder FromAppData(download=False, pip=bundle, setuptools=bundle, wheel=bundle, via=copy, app_data_dir=C:\Users\data\AppData\Local\pypa\virtualenv)
+    added seed packages: pip==21.1.2, setuptools==57.0.0, wheel==0.36.2
+  activators BashActivator,BatchActivator,FishActivator,PowerShellActivator,PythonActivator,XonshActivator
+
+Successfully created virtual environment!
+Virtualenv location: C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf
+Creating a Pipfile for this project...
+Installing flask...
+Adding flask to Pipfile's [packages]...
+Installation Succeeded
+Installing PyMySQL...
+Adding PyMySQL to Pipfile's [packages]...
+Installation Succeeded
+Locking [dev-packages] dependencies...
+Locking [packages] dependencies...
+ Locking...Building requirements...
+Resolving dependencies...
+Success!
+Updated Pipfile.lock (42c9ac)!
+  ================================ 0/0 - 00:00:00
+To activate this project's virtualenv, run pipenv shell.
+Alternatively, run a command inside the virtualenv with pipenv run.
+PS C:\Users\data\Desktop\python\flask_mysql\db_connection\first_flask_mysql> pipenv shell
+Launching subshell in virtual environment...
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Try the new cross-platform PowerShell https://aka.ms/pscore6
+
+PS C:\Users\data\Desktop\python\flask_mysql\db_connection\first_flask_mysql> python server.py
+ * Serving Flask app 'server' (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: on
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 336-958-029
+ * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+127.0.0.1 - - [14/Jul/2021 15:53:25] "GET / HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 2088, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 2073, in wsgi_app
+    response = self.handle_exception(e)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 1515, in full_dispatch_request 
+    rv = self.handle_user_exception(e)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 1513, in full_dispatch_request 
+    rv = self.dispatch_request()
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 1499, in dispatch_request      
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "C:\Users\data\Desktop\python\flask_mysql\db_connection\first_flask_mysql\server.py", line 15, in index
+    friends = Friend.get_all()
+  File "C:\Users\data\Desktop\python\flask_mysql\db_connection\first_flask_mysql\friend.py", line 17, in get_all
+    results = connectToMySQL('first_flask').query_db(query)
+  File "C:\Users\data\Desktop\python\flask_mysql\db_connection\first_flask_mysql\mysqlconnection.py", line 44, in connectToMySQL   
+    return MySQLConnection(db)
+  File "C:\Users\data\Desktop\python\flask_mysql\db_connection\first_flask_mysql\mysqlconnection.py", line 7, in __init__
+    connection = pymysql.connect(host = 'localhost',
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\pymysql\connections.py", line 353, in __init__     
+    self.connect()
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\pymysql\connections.py", line 633, in connect      
+    self._request_authentication()
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\pymysql\connections.py", line 907, in _request_authentication
+    auth_packet = self._read_packet()
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\pymysql\connections.py", line 725, in _read_packet 
+    packet.raise_for_error()
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error 
+    err.raise_mysql_exception(self._data)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1049, "Unknown database 'first_flask'")
+127.0.0.1 - - [14/Jul/2021 15:53:26] "GET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 15:53:26] "GET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 15:53:26] "GET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 15:53:26] "GET /?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1" 200 -
+ * Detected change in 'C:\\Users\\data\\Desktop\\python\\flask_mysql\\db_connection\\first_flask_mysql\\friend.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 336-958-029
+ * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+Running Query: SELECT * FROM friends;
+[<friend.Friend object at 0x00000202D624D640>, <friend.Friend object at 0x00000202D624D610>, <friend.Friend object at 0x00000202D624DB50>, <friend.Friend object at 0x00000202D624DC10>]
+127.0.0.1 - - [14/Jul/2021 15:54:53] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 15:54:53] "GET /static/css/style.css HTTP/1.1" 404 -
+Running Query: SELECT * FROM friends;
+[<friend.Friend object at 0x00000202D6285310>, <friend.Friend object at 0x00000202D6285340>, <friend.Friend object at 0x00000202D62850A0>, <friend.Friend object at 0x00000202D6285160>]
+127.0.0.1 - - [14/Jul/2021 15:54:58] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 15:54:58] "GET /static/css/style.css HTTP/1.1" 404 -
+Running Query: SELECT * FROM friends;
+[<friend.Friend object at 0x00000202D627CC70>, <friend.Friend object at 0x00000202D627CCA0>, <friend.Friend object at 0x00000202D627CA00>, <friend.Friend object at 0x00000202D627CAC0>]
+127.0.0.1 - - [14/Jul/2021 15:56:42] "GET / HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 2088, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 2073, in wsgi_app
+    response = self.handle_exception(e)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 1515, in full_dispatch_request 
+    rv = self.handle_user_exception(e)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 1513, in full_dispatch_request 
+    rv = self.dispatch_request()
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 1499, in dispatch_request      
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "C:\Users\data\Desktop\python\flask_mysql\db_connection\first_flask_mysql\server.py", line 17, in index
+    return render_template("index.html", friends = friends)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\templating.py", line 148, in render_template 
+    ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 1068, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 997, in get_template  
+    return self._load_template(name, globals)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 958, in _load_template    template = self.loader.load(self, name, self.make_globals(globals))
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\loaders.py", line 137, in load
+    code = environment.compile(source, name, filename)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 757, in compile       
+    self.handle_exception(source=source_hint)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 925, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\data\Desktop\python\flask_mysql\db_connection\first_flask_mysql\templates\index.html", line 21, in template       
+    {{% for friend in friends %}}
+jinja2.exceptions.TemplateSyntaxError: unexpected '%'
+127.0.0.1 - - [14/Jul/2021 15:56:43] "GET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 15:56:43] "GET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 15:56:43] "GET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 15:56:43] "GET /?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 15:56:44] "GET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+Running Query: SELECT * FROM friends;
+[<friend.Friend object at 0x00000202D6285D00>, <friend.Friend object at 0x00000202D6285C40>, <friend.Friend object at 0x00000202D62856A0>, <friend.Friend object at 0x00000202D6285DC0>]
+127.0.0.1 - - [14/Jul/2021 15:57:08] "GET / HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 2088, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 2073, in wsgi_app
+    response = self.handle_exception(e)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 1515, in full_dispatch_request 
+    rv = self.handle_user_exception(e)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 1513, in full_dispatch_request 
+    rv = self.dispatch_request()
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 1499, in dispatch_request      
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "C:\Users\data\Desktop\python\flask_mysql\db_connection\first_flask_mysql\server.py", line 17, in index
+    return render_template("index.html", friends = friends)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\templating.py", line 148, in render_template 
+    ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 1068, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 997, in get_template  
+    return self._load_template(name, globals)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 958, in _load_template    template = self.loader.load(self, name, self.make_globals(globals))
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\loaders.py", line 137, in load
+    code = environment.compile(source, name, filename)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 757, in compile       
+    self.handle_exception(source=source_hint)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 925, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\data\Desktop\python\flask_mysql\db_connection\first_flask_mysql\templates\index.html", line 21, in template       
+    {{ for friend in friends }}
+jinja2.exceptions.TemplateSyntaxError: expected token 'end of print statement', got 'friend'
+127.0.0.1 - - [14/Jul/2021 15:57:08] "GET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 15:57:08] "GET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 15:57:09] "GET /?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 15:57:09] "GET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 15:57:09] "GET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+Running Query: SELECT * FROM friends;
+[<friend.Friend object at 0x00000202D6482D00>, <friend.Friend object at 0x00000202D6482CD0>, <friend.Friend object at 0x00000202D6482F70>, <friend.Friend object at 0x00000202D6482EB0>]
+127.0.0.1 - - [14/Jul/2021 15:57:38] "GET / HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 2088, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 2073, in wsgi_app
+    response = self.handle_exception(e)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 1515, in full_dispatch_request 
+    rv = self.handle_user_exception(e)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 1513, in full_dispatch_request 
+    rv = self.dispatch_request()
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 1499, in dispatch_request      
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "C:\Users\data\Desktop\python\flask_mysql\db_connection\first_flask_mysql\server.py", line 17, in index
+    return render_template("index.html", friends = friends)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\templating.py", line 148, in render_template 
+    ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 1068, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 997, in get_template  
+    return self._load_template(name, globals)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 958, in _load_template    template = self.loader.load(self, name, self.make_globals(globals))
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\loaders.py", line 137, in load
+    code = environment.compile(source, name, filename)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 757, in compile       
+    self.handle_exception(source=source_hint)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 925, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\data\Desktop\python\flask_mysql\db_connection\first_flask_mysql\templates\index.html", line 21, in template       
+    {{% for friend in friends: %}}
+jinja2.exceptions.TemplateSyntaxError: unexpected '%'
+127.0.0.1 - - [14/Jul/2021 15:57:38] "GET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 15:57:38] "GET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 15:57:38] "GET /?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 15:57:38] "GET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 15:57:38] "GET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+Running Query: SELECT * FROM friends;
+[<friend.Friend object at 0x00000202D6671070>, <friend.Friend object at 0x00000202D6671040>, <friend.Friend object at 0x00000202D6671460>, <friend.Friend object at 0x00000202D6671310>]
+127.0.0.1 - - [14/Jul/2021 15:57:50] "GET / HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 2088, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 2073, in wsgi_app
+    response = self.handle_exception(e)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 1515, in full_dispatch_request 
+    rv = self.handle_user_exception(e)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 1513, in full_dispatch_request 
+    rv = self.dispatch_request()
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 1499, in dispatch_request      
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "C:\Users\data\Desktop\python\flask_mysql\db_connection\first_flask_mysql\server.py", line 17, in index
+    return render_template("index.html", friends = friends)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\templating.py", line 148, in render_template 
+    ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 1068, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 997, in get_template  
+    return self._load_template(name, globals)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 958, in _load_template    template = self.loader.load(self, name, self.make_globals(globals))
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\loaders.py", line 137, in load
+    code = environment.compile(source, name, filename)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 757, in compile       
+    self.handle_exception(source=source_hint)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 925, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\data\Desktop\python\flask_mysql\db_connection\first_flask_mysql\templates\index.html", line 21, in template       
+    {{% for friend in friends:%}}
+jinja2.exceptions.TemplateSyntaxError: unexpected '%'
+127.0.0.1 - - [14/Jul/2021 15:57:50] "GET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 15:57:50] "GET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 15:57:50] "GET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 15:57:50] "GET /?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 15:57:50] "GET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+Running Query: SELECT * FROM friends;
+[<friend.Friend object at 0x00000202D720C640>, <friend.Friend object at 0x00000202D720C610>, <friend.Friend object at 0x00000202D720C8E0>, <friend.Friend object at 0x00000202D720C820>]
+127.0.0.1 - - [14/Jul/2021 15:58:28] "GET / HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 2088, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 2073, in wsgi_app
+    response = self.handle_exception(e)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 1515, in full_dispatch_request 
+    rv = self.handle_user_exception(e)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 1513, in full_dispatch_request 
+    rv = self.dispatch_request()
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 1499, in dispatch_request      
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "C:\Users\data\Desktop\python\flask_mysql\db_connection\first_flask_mysql\server.py", line 17, in index
+    return render_template("index.html", friends = friends)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\templating.py", line 148, in render_template 
+    ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 1068, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 997, in get_template  
+    return self._load_template(name, globals)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 958, in _load_template    template = self.loader.load(self, name, self.make_globals(globals))
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\loaders.py", line 137, in load
+    code = environment.compile(source, name, filename)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 757, in compile       
+    self.handle_exception(source=source_hint)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 925, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\data\Desktop\python\flask_mysql\db_connection\first_flask_mysql\templates\index.html", line 21, in template       
+    {{% for friend in friends.items():%}}
+jinja2.exceptions.TemplateSyntaxError: unexpected '%'
+127.0.0.1 - - [14/Jul/2021 15:58:28] "GET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 15:58:28] "GET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 15:58:29] "GET /?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 15:58:29] "GET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 15:58:29] "GET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+ * Detected change in 'C:\\Users\\data\\Desktop\\python\\flask_mysql\\db_connection\\first_flask_mysql\\server.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 336-958-029
+ * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+ * Detected change in 'C:\\Users\\data\\Desktop\\python\\flask_mysql\\db_connection\\first_flask_mysql\\server.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 336-958-029
+ * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+ * Detected change in 'C:\\Users\\data\\Desktop\\python\\flask_mysql\\db_connection\\first_flask_mysql\\server.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 336-958-029
+ * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+Running Query: SELECT * FROM friends;
+[<friend.Friend object at 0x000001D205AFE610>, <friend.Friend object at 0x000001D205AFE5E0>, <friend.Friend object at 0x000001D205AFEB50>, <friend.Friend object at 0x000001D205AFEC10>]
+127.0.0.1 - - [14/Jul/2021 15:59:02] "GET / HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 2088, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 2073, in wsgi_app
+    response = self.handle_exception(e)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 1515, in full_dispatch_request 
+    rv = self.handle_user_exception(e)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 1513, in full_dispatch_request 
+    rv = self.dispatch_request()
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 1499, in dispatch_request      
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "C:\Users\data\Desktop\python\flask_mysql\db_connection\first_flask_mysql\server.py", line 17, in index
+    return render_template("index.html", friends = friends.getList())
+AttributeError: 'list' object has no attribute 'getList'
+127.0.0.1 - - [14/Jul/2021 15:59:03] "GET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 15:59:03] "GET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 15:59:03] "GET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 15:59:03] "GET /?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 15:59:03] "GET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+ * Detected change in 'C:\\Users\\data\\Desktop\\python\\flask_mysql\\db_connection\\first_flask_mysql\\server.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 336-958-029
+ * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+Running Query: SELECT * FROM friends;
+[<friend.Friend object at 0x00000179EAA7F640>, <friend.Friend object at 0x00000179EAA7F610>, <friend.Friend object at 0x00000179EAA7FB50>, <friend.Friend object at 0x00000179EAA7FC10>]
+127.0.0.1 - - [14/Jul/2021 16:00:13] "GET / HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 2088, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 2073, in wsgi_app
+    response = self.handle_exception(e)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 1515, in full_dispatch_request 
+    rv = self.handle_user_exception(e)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 1513, in full_dispatch_request 
+    rv = self.dispatch_request()
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 1499, in dispatch_request      
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "C:\Users\data\Desktop\python\flask_mysql\db_connection\first_flask_mysql\server.py", line 17, in index
+    return render_template("index.html", friends = friends)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\templating.py", line 148, in render_template 
+    ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 1068, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 997, in get_template  
+    return self._load_template(name, globals)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 958, in _load_template    template = self.loader.load(self, name, self.make_globals(globals))
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\loaders.py", line 137, in load
+    code = environment.compile(source, name, filename)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 757, in compile       
+    self.handle_exception(source=source_hint)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 925, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\data\Desktop\python\flask_mysql\db_connection\first_flask_mysql\templates\index.html", line 21, in template       
+    {{% for friend in friends.objects: %}}
+jinja2.exceptions.TemplateSyntaxError: unexpected '%'
+127.0.0.1 - - [14/Jul/2021 16:00:14] "GET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 16:00:14] "GET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 16:00:14] "GET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 16:00:14] "GET /?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 16:00:15] "GET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+Running Query: SELECT * FROM friends;
+[<friend.Friend object at 0x00000179EACA65B0>, <friend.Friend object at 0x00000179EACA6220>, <friend.Friend object at 0x00000179EACA6430>, <friend.Friend object at 0x00000179EACA6610>]
+127.0.0.1 - - [14/Jul/2021 16:00:35] "GET / HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 2088, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 2073, in wsgi_app
+    response = self.handle_exception(e)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 1515, in full_dispatch_request 
+    rv = self.handle_user_exception(e)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 1513, in full_dispatch_request 
+    rv = self.dispatch_request()
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 1499, in dispatch_request      
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "C:\Users\data\Desktop\python\flask_mysql\db_connection\first_flask_mysql\server.py", line 17, in index
+    return render_template("index.html", friends = friends)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\templating.py", line 148, in render_template 
+    ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 1068, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 997, in get_template  
+    return self._load_template(name, globals)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 958, in _load_template    template = self.loader.load(self, name, self.make_globals(globals))
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\loaders.py", line 137, in load
+    code = environment.compile(source, name, filename)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 757, in compile       
+    self.handle_exception(source=source_hint)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 925, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\data\Desktop\python\flask_mysql\db_connection\first_flask_mysql\templates\index.html", line 22, in template       
+    {{% for friend in friends.objects: %}}
+jinja2.exceptions.TemplateSyntaxError: unexpected '%'
+127.0.0.1 - - [14/Jul/2021 16:00:35] "GET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 16:00:35] "GET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 16:00:35] "GET /?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 16:00:35] "GET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 16:00:35] "GET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+Running Query: SELECT * FROM friends;
+[<friend.Friend object at 0x00000179EAE839A0>, <friend.Friend object at 0x00000179EAE83970>, <friend.Friend object at 0x00000179EAE83C40>, <friend.Friend object at 0x00000179EAE83B80>]
+127.0.0.1 - - [14/Jul/2021 16:00:47] "GET / HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 2088, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 2073, in wsgi_app
+    response = self.handle_exception(e)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 1515, in full_dispatch_request 
+    rv = self.handle_user_exception(e)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 1513, in full_dispatch_request 
+    rv = self.dispatch_request()
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 1499, in dispatch_request      
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "C:\Users\data\Desktop\python\flask_mysql\db_connection\first_flask_mysql\server.py", line 17, in index
+    return render_template("index.html", friends = friends)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\templating.py", line 148, in render_template 
+    ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 1068, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 997, in get_template  
+    return self._load_template(name, globals)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 958, in _load_template    template = self.loader.load(self, name, self.make_globals(globals))
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\loaders.py", line 137, in load
+    code = environment.compile(source, name, filename)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 757, in compile       
+    self.handle_exception(source=source_hint)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 925, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\data\Desktop\python\flask_mysql\db_connection\first_flask_mysql\templates\index.html", line 22, in template       
+    {{% for friend in friends.objects:%}}
+jinja2.exceptions.TemplateSyntaxError: unexpected '%'
+127.0.0.1 - - [14/Jul/2021 16:00:47] "GET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 16:00:47] "GET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 16:00:47] "GET /?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 16:00:47] "GET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 16:00:47] "GET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+Running Query: SELECT * FROM friends;
+[<friend.Friend object at 0x00000179EAAAEE20>, <friend.Friend object at 0x00000179EAAAEA60>, <friend.Friend object at 0x00000179EAAAEA30>, <friend.Friend object at 0x00000179EAAAED60>]
+127.0.0.1 - - [14/Jul/2021 16:02:48] "GET / HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 2088, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 2073, in wsgi_app
+    response = self.handle_exception(e)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 1515, in full_dispatch_request 
+    rv = self.handle_user_exception(e)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 1513, in full_dispatch_request 
+    rv = self.dispatch_request()
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 1499, in dispatch_request      
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "C:\Users\data\Desktop\python\flask_mysql\db_connection\first_flask_mysql\server.py", line 17, in index
+    return render_template("index.html", friends = friends)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\templating.py", line 148, in render_template 
+    ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 1068, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 997, in get_template  
+    return self._load_template(name, globals)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 958, in _load_template    template = self.loader.load(self, name, self.make_globals(globals))
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\loaders.py", line 137, in load
+    code = environment.compile(source, name, filename)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 757, in compile       
+    self.handle_exception(source=source_hint)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 925, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\data\Desktop\python\flask_mysql\db_connection\first_flask_mysql\templates\index.html", line 21, in template       
+    {{% for Friend in friends.objects:%}}
+jinja2.exceptions.TemplateSyntaxError: unexpected '%'
+127.0.0.1 - - [14/Jul/2021 16:02:49] "GET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 16:02:49] "GET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 16:02:49] "GET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 16:02:49] "GET /?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 16:02:49] "GET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+Running Query: SELECT * FROM friends;
+[<friend.Friend object at 0x00000179EB22C760>, <friend.Friend object at 0x00000179EB22C730>, <friend.Friend object at 0x00000179EB22CA00>, <friend.Friend object at 0x00000179EB22C940>]
+127.0.0.1 - - [14/Jul/2021 16:02:59] "GET / HTTP/1.1" 200 -
+Running Query: SELECT * FROM friends;
+[<friend.Friend object at 0x00000179EB23EFA0>, <friend.Friend object at 0x00000179EB23EFD0>, <friend.Friend object at 0x00000179EB23EA00>, <friend.Friend object at 0x00000179EB23ED90>]
+127.0.0.1 - - [14/Jul/2021 16:03:10] "GET / HTTP/1.1" 200 -
+Running Query: SELECT * FROM friends;
+[<friend.Friend object at 0x00000179EBA48B20>, <friend.Friend object at 0x00000179EBA48B50>, <friend.Friend object at 0x00000179EBA488B0>, <friend.Friend object at 0x00000179EBA48970>]
+127.0.0.1 - - [14/Jul/2021 16:03:21] "GET / HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 2088, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 2073, in wsgi_app
+    response = self.handle_exception(e)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 1515, in full_dispatch_request 
+    rv = self.handle_user_exception(e)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 1513, in full_dispatch_request 
+    rv = self.dispatch_request()
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 1499, in dispatch_request      
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "C:\Users\data\Desktop\python\flask_mysql\db_connection\first_flask_mysql\server.py", line 17, in index
+    return render_template("index.html", friends = friends)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\templating.py", line 147, in render_template 
+    return _render(
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\templating.py", line 128, in _render
+    rv = template.render(context)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 1304, in render       
+    self.environment.handle_exception()
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 925, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\data\Desktop\python\flask_mysql\db_connection\first_flask_mysql\templates\index.html", line 21, in top-level template code
+    {{ friends.objects[1] }}
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 455, in getitem       
+    return obj[argument]
+jinja2.exceptions.UndefinedError: 'list object' has no attribute 'objects'
+127.0.0.1 - - [14/Jul/2021 16:03:21] "GET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 16:03:21] "GET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 16:03:21] "GET /?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 16:03:21] "GET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+ * Detected change in 'C:\\Users\\data\\Desktop\\python\\flask_mysql\\db_connection\\first_flask_mysql\\friend.py', reloading      
+ * Restarting with stat
+Traceback (most recent call last):
+  File "C:\Users\data\Desktop\python\flask_mysql\db_connection\first_flask_mysql\server.py", line 8, in <module>
+    from friend import Friend
+  File "C:\Users\data\Desktop\python\flask_mysql\db_connection\first_flask_mysql\friend.py", line 22
+    newFriend =
+                ^
+SyntaxError: invalid syntax
+PS C:\Users\data\Desktop\python\flask_mysql\db_connection\first_flask_mysql> python server.py
+ * Serving Flask app 'server' (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: on
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 336-958-029
+ * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+Running Query: SELECT * FROM friends;
+[<friend.Friend object at 0x0000021BE645D610>, <friend.Friend object at 0x0000021BE645D5E0>, <friend.Friend object at 0x0000021BE645DB20>, <friend.Friend object at 0x0000021BE645DBE0>]
+127.0.0.1 - - [14/Jul/2021 16:04:01] "GET / HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 2088, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 2073, in wsgi_app
+    response = self.handle_exception(e)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 1515, in full_dispatch_request 
+    rv = self.handle_user_exception(e)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 1513, in full_dispatch_request 
+    rv = self.dispatch_request()
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 1499, in dispatch_request      
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "C:\Users\data\Desktop\python\flask_mysql\db_connection\first_flask_mysql\server.py", line 17, in index
+    return render_template("index.html", friends = friends)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\templating.py", line 147, in render_template 
+    return _render(
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\templating.py", line 128, in _render
+    rv = template.render(context)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 1304, in render       
+    self.environment.handle_exception()
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 925, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\data\Desktop\python\flask_mysql\db_connection\first_flask_mysql\templates\index.html", line 21, in top-level template code
+    {{ friends.objects[1] }}
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 455, in getitem       
+    return obj[argument]
+jinja2.exceptions.UndefinedError: 'list object' has no attribute 'objects'
+127.0.0.1 - - [14/Jul/2021 16:04:01] "GET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 16:04:01] "GET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 16:04:01] "GET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 16:04:02] "GET /?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 16:04:02] "GET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+Running Query: SELECT * FROM friends;
+[<friend.Friend object at 0x0000021BE648CA30>, <friend.Friend object at 0x0000021BE648CA60>, <friend.Friend object at 0x0000021BE648C910>, <friend.Friend object at 0x0000021BE648C970>]
+127.0.0.1 - - [14/Jul/2021 16:04:12] "GET / HTTP/1.1" 200 -
+Running Query: SELECT * FROM friends;
+[<friend.Friend object at 0x0000021BE6638B80>, <friend.Friend object at 0x0000021BE6638B50>, <friend.Friend object at 0x0000021BE6638B20>, <friend.Friend object at 0x0000021BE6638EE0>]
+127.0.0.1 - - [14/Jul/2021 16:04:24] "GET / HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 2088, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 2073, in wsgi_app
+    response = self.handle_exception(e)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 1515, in full_dispatch_request 
+    rv = self.handle_user_exception(e)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 1513, in full_dispatch_request 
+    rv = self.dispatch_request()
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 1499, in dispatch_request      
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "C:\Users\data\Desktop\python\flask_mysql\db_connection\first_flask_mysql\server.py", line 17, in index
+    return render_template("index.html", friends = friends)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\templating.py", line 147, in render_template 
+    return _render(
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\templating.py", line 128, in _render
+    rv = template.render(context)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 1304, in render       
+    self.environment.handle_exception()
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 925, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\data\Desktop\python\flask_mysql\db_connection\first_flask_mysql\templates\index.html", line 21, in top-level template code
+    {{ friends.getList() }}
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\utils.py", line 84, in from_obj
+    if hasattr(obj, "jinja_pass_arg"):
+jinja2.exceptions.UndefinedError: 'list object' has no attribute 'getList'
+127.0.0.1 - - [14/Jul/2021 16:04:25] "GET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 16:04:25] "GET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 16:04:25] "GET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 16:04:25] "GET /?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 16:04:25] "GET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+Running Query: SELECT * FROM friends;
+[<friend.Friend object at 0x0000021BE648C0D0>, <friend.Friend object at 0x0000021BE648C310>, <friend.Friend object at 0x0000021BE648CB50>, <friend.Friend object at 0x0000021BE648CA90>]
+127.0.0.1 - - [14/Jul/2021 16:04:31] "GET / HTTP/1.1" 200 -
+Running Query: SELECT * FROM friends;
+[<friend.Friend object at 0x0000021BE67C6DC0>, <friend.Friend object at 0x0000021BE67C6DF0>, <friend.Friend object at 0x0000021BE67C6B80>, <friend.Friend object at 0x0000021BE67C6C40>]
+127.0.0.1 - - [14/Jul/2021 16:05:05] "GET / HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 2088, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 2073, in wsgi_app
+    response = self.handle_exception(e)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 1515, in full_dispatch_request 
+    rv = self.handle_user_exception(e)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 1513, in full_dispatch_request 
+    rv = self.dispatch_request()
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 1499, in dispatch_request      
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "C:\Users\data\Desktop\python\flask_mysql\db_connection\first_flask_mysql\server.py", line 17, in index
+    return render_template("index.html", friends = friends)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\templating.py", line 148, in render_template 
+    ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 1068, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 997, in get_template  
+    return self._load_template(name, globals)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 958, in _load_template    template = self.loader.load(self, name, self.make_globals(globals))
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\loaders.py", line 137, in load
+    code = environment.compile(source, name, filename)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 757, in compile       
+    self.handle_exception(source=source_hint)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 925, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\data\Desktop\python\flask_mysql\db_connection\first_flask_mysql\templates\index.html", line 21, in template       
+    {{ <friends class="friend"></friends> }}
+jinja2.exceptions.TemplateSyntaxError: unexpected '<'
+127.0.0.1 - - [14/Jul/2021 16:05:06] "GET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 16:05:06] "GET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 16:05:06] "GET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 16:05:06] "GET /?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 16:05:06] "GET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+Running Query: SELECT * FROM friends;
+[<friend.Friend object at 0x0000021BE649A3D0>, <friend.Friend object at 0x0000021BE649A3A0>, <friend.Friend object at 0x0000021BE649A7F0>, <friend.Friend object at 0x0000021BE649A7C0>]
+127.0.0.1 - - [14/Jul/2021 16:05:17] "GET / HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 2088, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 2073, in wsgi_app
+    response = self.handle_exception(e)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 1515, in full_dispatch_request 
+    rv = self.handle_user_exception(e)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 1513, in full_dispatch_request 
+    rv = self.dispatch_request()
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 1499, in dispatch_request      
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "C:\Users\data\Desktop\python\flask_mysql\db_connection\first_flask_mysql\server.py", line 17, in index
+    return render_template("index.html", friends = friends)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\templating.py", line 147, in render_template 
+    return _render(
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\templating.py", line 128, in _render
+    rv = template.render(context)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 1304, in render       
+    self.environment.handle_exception()
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 925, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\data\Desktop\python\flask_mysql\db_connection\first_flask_mysql\templates\index.html", line 21, in top-level template code
+    {{ friend.friend[1]}}
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 474, in getattr       
+    return getattr(obj, attribute)
+jinja2.exceptions.UndefinedError: 'friend' is undefined
+127.0.0.1 - - [14/Jul/2021 16:05:17] "GET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 16:05:17] "GET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 16:05:17] "GET /?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 16:05:17] "GET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 16:05:17] "GET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+Running Query: SELECT * FROM friends;
+[<friend.Friend object at 0x0000021BE64417F0>, <friend.Friend object at 0x0000021BE6441790>, <friend.Friend object at 0x0000021BE6441880>, <friend.Friend object at 0x0000021BE64414C0>]
+127.0.0.1 - - [14/Jul/2021 16:05:26] "GET / HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 2088, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 2073, in wsgi_app
+    response = self.handle_exception(e)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 1515, in full_dispatch_request 
+    rv = self.handle_user_exception(e)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 1513, in full_dispatch_request 
+    rv = self.dispatch_request()
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\app.py", line 1499, in dispatch_request      
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "C:\Users\data\Desktop\python\flask_mysql\db_connection\first_flask_mysql\server.py", line 17, in index
+    return render_template("index.html", friends = friends)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\templating.py", line 147, in render_template 
+    return _render(
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\flask\templating.py", line 128, in _render
+    rv = template.render(context)
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 1304, in render       
+    self.environment.handle_exception()
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 925, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\data\Desktop\python\flask_mysql\db_connection\first_flask_mysql\templates\index.html", line 21, in top-level template code
+    {{ friend[1].friend }}
+  File "C:\Users\data\.virtualenvs\first_flask_mysql-UeXT7bYf\Lib\site-packages\jinja2\environment.py", line 455, in getitem       
+    return obj[argument]
+jinja2.exceptions.UndefinedError: 'friend' is undefined
+127.0.0.1 - - [14/Jul/2021 16:05:26] "GET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 16:05:26] "GET /?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 16:05:27] "GET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2021 16:05:27] "GET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+ * Restarting with stat
+Traceback (most recent call last):
+  File "C:\Users\data\Desktop\python\flask_mysql\db_connection\first_flask_mysql\server.py", line 8, in <module>
+    import Friend
+ModuleNotFoundError: No module named 'Friend'
+PS C:\Users\data\Desktop\python\flask_mysql\db_connection\first_flask_mysql> python server.py
+Traceback (most recent call last):
+  File "C:\Users\data\Desktop\python\flask_mysql\db_connection\first_flask_mysql\server.py", line 8, in <module>
+    import Friend
+ModuleNotFoundError: No module named 'Friend'
+PS C:\Users\data\Desktop\python\flask_mysql\db_connection\first_flask_mysql> python server.py
+ * Serving Flask app 'server' (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: on
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 336-958-029
+ * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+Running Query: SELECT * FROM friends;
+[<friend.Friend object at 0x00000180FCD3F5E0>, <friend.Friend object at 0x00000180FCD3F5B0>, <friend.Friend object at 0x00000180FCD3FB20>, <friend.Friend object at 0x00000180FCD3FBE0>]
+127.0.0.1 - - [14/Jul/2021 16:09:23] "GET / HTTP/1.1" 200 -
+Running Query: SELECT * FROM friends;
+[<friend.Friend object at 0x00000180FCD7AD00>, <friend.Friend object at 0x00000180FCD7AD30>, <friend.Friend object at 0x00000180FCD7AA90>, <friend.Friend object at 0x00000180FCD7AB50>]
+127.0.0.1 - - [14/Jul/2021 16:09:53] "GET / HTTP/1.1" 200 -
+Running Query: SELECT * FROM friends;
+[<friend.Friend object at 0x00000180FCD7A7C0>, <friend.Friend object at 0x00000180FCD7AAC0>, <friend.Friend object at 0x00000180FCD7A520>, <friend.Friend object at 0x00000180FCD7A310>]
+127.0.0.1 - - [14/Jul/2021 16:09:55] "GET / HTTP/1.1" 200 -
+Running Query: SELECT * FROM friends;
+[<friend.Friend object at 0x00000180FCD7AB20>, <friend.Friend object at 0x00000180FCD7A4C0>, <friend.Friend object at 0x00000180FCD7A970>, <friend.Friend object at 0x00000180FCD7A760>]
+127.0.0.1 - - [14/Jul/2021 16:10:04] "GET / HTTP/1.1" 200 -
+Running Query: SELECT * FROM friends;
+[<friend.Friend object at 0x00000180FCD8BF40>, <friend.Friend object at 0x00000180FCD8BC10>, <friend.Friend object at 0x00000180FCD8B610>, <friend.Friend object at 0x00000180FCD8B4F0>]
+127.0.0.1 - - [14/Jul/2021 16:10:11] "GET / HTTP/1.1" 200 -
+Running Query: SELECT * FROM friends;
+[<friend.Friend object at 0x00000180FCD7A850>, <friend.Friend object at 0x00000180FCD7A4F0>, <friend.Friend object at 0x00000180FCD7A520>, <friend.Friend object at 0x00000180FCD7A550>]
+127.0.0.1 - - [14/Jul/2021 16:10:46] "GET / HTTP/1.1" 200 -
