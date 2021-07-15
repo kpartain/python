@@ -22,4 +22,24 @@ class Friend:
             newFriend = cls(friend)
             friends.append(newFriend)
         return friends
-            
+    def update_one(cls, newName, idNum):
+        query = "UPDATE friends SET first_name=%(newName)s WHERE id=%(idNum)s;"
+        data = {
+            "newName": request.form['newName'],#possibly a value from a form
+            "idNum": request.form['idNum']#possibly a value from the URL
+            } 
+        mysql.query_db(query, data)
+        return "updated name!"
+    def find_by_name(cls, findName):
+        query = "SELECT * from friends WHERE first_name = %(findName)s;"
+        data = {
+            'findName': request.form['email']
+        }
+        result = mysql.query_db(query, data)
+        matchFriend = cls(result)
+        return matchFriend
+    @classmethod
+    def save(cls, data ):
+        query = "INSERT INTO friends ( first_name , last_name , occupation , created_at, updated_at ) VALUES ( %(fname)s , %(lname)s , %(occ)s , NOW() , NOW() );"
+        # data is a dictionary that will be passed into the save method from server.py
+        return connectToMySQL('first_flask').query_db( query, data )
