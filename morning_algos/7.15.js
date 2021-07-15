@@ -168,22 +168,27 @@ class SLList {
             runner = runner.next;
         }
         console.log("Maximum Value found:", theMaximum);
-        runner = this.head.next;
-        while(runner.next != null) {
-            runner = runner.next;
-            if(runner.value == theMaximum) {
-                runner.value = runner.next.value;
+        var previousNode = this.head;
+        var currentNode = previousNode.next
+        while(previousNode.next != null) {
+            if(previousNode.value == theMaximum) {
+                previousNode = currentNode;
+                currentNode = currentNode.next;
             }
+            previousNode = currentNode;
+            currentNode = currentNode.next;
         }
         return this;
     }
 
     printAll(){
+        var string = "Current: "
         var potato = this.head;
         while(potato.next != null) {
-            console.log("CURRENT:",potato.value);
+            string += potato.value + ", "
             potato = potato.next;
         }
+        console.log(string);
     }
 }
 // Challenge 1: moveMinToFront()
@@ -200,9 +205,7 @@ class SLList {
 // H: 1 -> 7 -> 11 -> 2 -> 18 -> 4 -> 6 would become H: 1 -> 7 -> 11 -> 2 -> 4 -> 6 -> 18
 var test2 = new SLList();
 test2.addToFront(6).addToFront(4).addToFront(18).addToFront(2).addToFront(11).addToFront(7).addToFront(1);
-console.log("========================BEFORE========================");
-console.log(test2);
 test2.moveMaxToBack();
-console.log("=*=*=*=*=*==============AFTER==============*=*=*=*=*=");
-console.log(test2);
+console.log("Start:   1, 7, 11, 2, 18, 4, 6")
+console.log("Goal:    1, 7, 11, 2, 4, 6, 18")
 test2.printAll();
