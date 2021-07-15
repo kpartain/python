@@ -168,42 +168,41 @@ class SLList {
             runner = runner.next;
         }
         console.log("Maximum Value found:", theMaximum);
-        runner = this.head;
+        runner = this.head.next;
         while(runner.next != null) {
+            runner = runner.next;
             if(runner.value == theMaximum) {
                 runner.value = runner.next.value;
             }
-            runner = runner.next;
         }
-        runner.next = theMaximum;
         return this;
     }
 
     printAll(){
         var potato = this.head;
         while(potato.next != null) {
-            console.log(potato);
+            console.log("CURRENT:",potato.value);
             potato = potato.next;
         }
     }
 }
 // Challenge 1: moveMinToFront()
 // H: 5 -> 3 -> 6 -> 1 -> 2 -> would become H: 1 -> 5 -> 3 -> 6 -> 2 -> 
-var test1 = new SLList();
-test1.addToFront(2).addToFront(1).addToFront(6).addToFront(3).addToFront(5);
-console.log("========================BEFORE========================");
-console.log(test1);
-test1.moveMinToFront()
-console.log("=*=*=*=*=*==============AFTER==============*=*=*=*=*=");
-console.log(test1);
+// var test1 = new SLList();
+// test1.addToFront(2).addToFront(1).addToFront(6).addToFront(3).addToFront(5);
+// console.log("========================BEFORE========================");
+// console.log(test1);
+// test1.moveMinToFront()
+// console.log("=*=*=*=*=*==============AFTER==============*=*=*=*=*=");
+// console.log(test1);
 
 // Challenge 2: moveMaxToBack()
-// H: 1 -> 7 -> 11 -> 2 -> 18 -> 4 -> would become H: 1 -> 7 -> 11 -> 2 -> 4 -> 18 ->
-// var test2 = new SLList();
-// test2.addToFront(4).addToFront(18).addToFront(2).addToFront(11).addToFront(7).addToFront(1);
-// console.log("========================BEFORE========================");
-// console.log(test2);
-// test2.moveMaxToBack();
-// console.log("=*=*=*=*=*==============AFTER==============*=*=*=*=*=");
-// console.log(test2);
-// test2.printAll();
+// H: 1 -> 7 -> 11 -> 2 -> 18 -> 4 -> 6 would become H: 1 -> 7 -> 11 -> 2 -> 4 -> 6 -> 18
+var test2 = new SLList();
+test2.addToFront(6).addToFront(4).addToFront(18).addToFront(2).addToFront(11).addToFront(7).addToFront(1);
+console.log("========================BEFORE========================");
+console.log(test2);
+test2.moveMaxToBack();
+console.log("=*=*=*=*=*==============AFTER==============*=*=*=*=*=");
+console.log(test2);
+test2.printAll();
