@@ -6,7 +6,7 @@ class SLNode {
 }
 
 class SLList {
-    constructor(){
+    constructor() {
         this.head = null;
     }
 
@@ -18,7 +18,7 @@ class SLList {
     }
 
     addToBack(value) {
-        if(this.head == null) {
+        if (this.head == null) {
             this.addToFront(value);
             return this;
         }
@@ -26,7 +26,7 @@ class SLList {
         var newNode = new SLNode(value);
         var runner = this.head;
 
-        while(runner.next != null) {
+        while (runner.next != null) {
             runner = runner.next;
         }
 
@@ -35,16 +35,16 @@ class SLList {
     }
 
     contains(value) {
-        if(this.head == null) {
+        if (this.head == null) {
             return false;
         }
 
         var runner = this.head;
 
-        while(runner != null) {
-            if(runner.value == value) {
+        while (runner != null) {
+            if (runner.value == value) {
                 return true;
-            } else { 
+            } else {
                 runner = runner.next;
             }
         }
@@ -53,7 +53,7 @@ class SLList {
     }
 
     removeFront() {
-        if(this.head == null) {
+        if (this.head == null) {
             return false;
         }
 
@@ -65,15 +65,15 @@ class SLList {
     }
 
     removeBack() {
-        if(this.head == null) {
+        if (this.head == null) {
             return false;
-        } else if(this.head.next = null) {
+        } else if ((this.head.next = null)) {
             return this.removeFront();
         }
 
-        var lagger = null; 
-        var leader = this.head; 
-        while(leader.next != null) {
+        var lagger = null;
+        var leader = this.head;
+        while (leader.next != null) {
             lagger = leader;
             leader = leader.next;
         }
@@ -82,8 +82,8 @@ class SLList {
         return leader;
     }
 
-    moveMinToFront(){
-        if(this.head == null || this.head.next == null) {
+    moveMinToFront() {
+        if (this.head == null || this.head.next == null) {
             return this;
         }
         var minPrev = null; // At the end, we'll use this to "skip around" the min
@@ -92,8 +92,8 @@ class SLList {
         var lagger = null;
         var leader = this.head;
 
-        while(leader != null) {
-            if(leader.value < min.value) {
+        while (leader != null) {
+            if (leader.value < min.value) {
                 min = leader;
                 minPrev = lagger;
             }
@@ -101,7 +101,7 @@ class SLList {
             leader = leader.next;
         }
 
-        if(min != this.head) {
+        if (min != this.head) {
             minPrev.next = min.next;
             min.next = this.head;
             this.head = min;
@@ -109,16 +109,16 @@ class SLList {
         return this;
     }
 
-    moveMaxToBack(){
-        if(this.head == null || this.head.next == null) {
+    moveMaxToBack() {
+        if (this.head == null || this.head.next == null) {
             return this;
         }
         var maxPrev = null;
         var max = this.head;
         var lagger = null;
         var leader = this.head;
-        while(leader != null) {
-            if(leader.value > max.value) {
+        while (leader != null) {
+            if (leader.value > max.value) {
                 max = leader;
                 maxPrev = lagger;
             }
@@ -126,7 +126,7 @@ class SLList {
             leader = leader.next;
         }
 
-        if(max = this.head) {
+        if ((max = this.head)) {
             this.head = max.next;
         } else {
             maxPrev.next = max.next;
@@ -136,47 +136,52 @@ class SLList {
         return this;
     }
 
-    prepend(valueToFind, valueToAdd){
+    prepend(valueToFind, valueToAdd) {
         // - What if the list is empty?
-        if(this.head == null) {
-            return false
-        }// - What if the value I'm looking for isn't there?
-        else if(this.contains(valueToFind) == false) {
-            return false
-        }
-        else {
-            var nodeToAdd = new SLNode(valueToAdd);
-            var behind = this.head;
-            var ahead = behind.next;
-            while(behind.next != null) {
-                if (behind.value == valueToFind) {
-                    ahead.next = ahead;
-                    ahead = behind;
-                    behind = nodeToAdd;
+        if (this.head == null) {
+            return false;
+        } // - What if the value I'm looking for isn't there?
+        else if (this.contains(valueToFind) == false) {
+            return false;
+        } else {
+            var findNode = new SLNode(valueToFind);
+            var firstPos = this.head;
+            while (firstPos != findNode && firstPos.next != null) {
+                if(firstPos == findNode) {
+                    break;
+                } else {
+                    firstPos = firstPos.next;
                 }
             }
+            console.log("First Pos:");
+            console.log(firstPos);
+            var nodeAdded = new SLNode(valueToAdd);
+            nodeAdded.next = firstPos;
+            var runner = firstPos.next;
+            while (firstPos != null) {
+                runner = firstPos;
+                firstPos = firstPos.next;
+            }
+            return this;
         }
-        
     }
 
-    append(valueToFind, valueToAdd){
+    append(valueToFind, valueToAdd) {
         // - What if the list is empty?
-        if(this.head == null) {
-            return false
-        }// - What if the value I'm looking for isn't there?
-        else if(this.contains(valueToFind) == false) {
-            return false
-        }
-        else {
-
+        if (this.head == null) {
+            return false;
+        } // - What if the value I'm looking for isn't there?
+        else if (this.contains(valueToFind) == false) {
+            return false;
+        } else {
         }
     }
 
-    printAll(){
-        var string = "Current: "
+    printAll() {
+        var string = "Current: ";
         var potato = this.head;
-        while(potato.next != null) {
-            string += potato.value + ", "
+        while (potato != null) {
+            string += potato.value + ", ";
             potato = potato.next;
         }
         console.log(string);
@@ -192,10 +197,10 @@ class SLList {
 */
 someList = new SLList();
 someList.addToFront(1).addToFront(2).addToFront(4).addToFront(5);
-console.log("Before Prepend: ----------------------")
+console.log("Before Prepend: ----------------------");
 someList.printAll();
-someList.prepend(2,3);
-console.log("After Prepend: ----------------------")
+someList.prepend(2, 3);
+console.log("After Prepend: ----------------------");
 someList.printAll();
 
 /*
