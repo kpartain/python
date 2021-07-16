@@ -113,19 +113,15 @@ class SLList {
         if(this.head == null || this.head.next == null) {
             return this;
         }
-
         var maxPrev = null;
         var max = this.head;
-
         var lagger = null;
         var leader = this.head;
-
         while(leader != null) {
             if(leader.value > max.value) {
                 max = leader;
                 maxPrev = lagger;
             }
-
             lagger = leader;
             leader = leader.next;
         }
@@ -149,7 +145,16 @@ class SLList {
             return false
         }
         else {
-
+            var nodeToAdd = new SLNode(valueToAdd);
+            var behind = this.head;
+            var ahead = behind.next;
+            while(behind.next != null) {
+                if (behind.value == valueToFind) {
+                    ahead.next = ahead;
+                    ahead = behind;
+                    behind = nodeToAdd;
+                }
+            }
         }
         
     }
