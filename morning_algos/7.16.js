@@ -140,16 +140,31 @@ class SLList {
         return this;
     }
 
-    prepend(vaueToFind, valueToAdd){
+    prepend(valueToFind, valueToAdd){
         // - What if the list is empty?
-        // - What if the value I'm looking for isn't there?
-        //     - You can just return False in that case.
+        if(this.head == null) {
+            return false
+        }// - What if the value I'm looking for isn't there?
+        else if(this.contains(valueToFind) == false) {
+            return false
+        }
+        else {
+
+        }
+        
     }
 
     append(valueToFind, valueToAdd){
         // - What if the list is empty?
-        // - What if the value I'm looking for isn't there?
-        //     - You can just return False in that case.
+        if(this.head == null) {
+            return false
+        }// - What if the value I'm looking for isn't there?
+        else if(this.contains(valueToFind) == false) {
+            return false
+        }
+        else {
+
+        }
     }
 
     printAll(){
