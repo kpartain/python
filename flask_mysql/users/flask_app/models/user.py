@@ -25,3 +25,16 @@ class User:
         query = "INSERT INTO users (first_name, last_name, email) VALUES (%(first_name)s, %(last_name)s, %(email)s);"
         saved_user_ID = connectToMySQL('users_schema').query_db(query, data)
         return saved_user_ID
+
+    @classmethod
+    def get_single_user(cls, data):
+        query = "SELECT * from users WHERE users.id = %(id)s;"
+        db_response = connectToMySQL('users_schema').query_db(query, data)
+        #this returns a list with only one response so we need to use index 
+        singleClassObject = cls(db_response[0])
+        return singleClassObject
+
+    @classmethod
+    def update_single_user(cls, data):
+        query = "UPDATE users SET first_name = %(first_name)s, last_name = %(last_name)s, email = %(email)s WHERE id = %(id)s;"
+        connectToMySQL('users_schema').query_db(query, data)
