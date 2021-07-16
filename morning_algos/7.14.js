@@ -1,5 +1,3 @@
-const { thomsonCrossSectionDependencies } = require("mathjs");
-
 class SLNode {
     constructor(value) {
         this.value = value;
