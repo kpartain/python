@@ -1,0 +1,4 @@
+insert into users (first_name, last_name, email)
+values
+('Kara','Partain','karalynnleann@gmail.com'),
+('Mando','Partain','mando@dogs-rock.com');
