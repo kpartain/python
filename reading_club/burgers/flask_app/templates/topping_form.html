@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <!-- PAGE TITLE -->
+    <title></title>
+    <!-- GENERIC FAVICON -->
+    <link rel='icon' type='image/jpg' href='https://karaspersonalprojectbucket.s3.us-east-2.amazonaws.com/favicon.ico'/>
+    <!-- BOOTSTRAP/FOUNDATION -->
+    <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>
+    <!-- GOOGLE FONTS -->
+    <link rel='preconnect' href='https://fonts.googleapis.com' />
+    <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />
+    <link href='https://fonts.googleapis.com/css2?family=Montserrat&display=swap' rel='stylesheet'/>
+    <!-- LINKED CSS PAGES -->
+    <link rel='stylesheet' href='../static/css/style.css'>
+</head>
+<body>
+    <form action="/add-topping" method="post">
+        {% for burger in burgers %}
+        <input type="radio" name="burger_id" value="{{burger.id}}"/>
+        <label for="{{burger.name}}">{{burger.id}}: {{burger.name}}</label>
+        <br>
+        {% endfor %}
+        <!-- do I post as for topping_name or can I dual post as burger.toppings? -->
+        <label for="topping_name">What topping would you like to add?</label>
+        <input type="text" name="topping_name" />
+        </form>
+</body>
+</html>

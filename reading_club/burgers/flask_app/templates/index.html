@@ -27,19 +27,15 @@
             <label for="calories">Calories:</label>
             <input type="number" min="0" name="calories" id="calories" class="form-control">
         </div>
+        <div class="form-group">
+            <input type="hidden" name="burger_id" value="BURGERID" />
+            <p>Select an existing topping to add:</p>
+            {% for eachTopping in allCurrentToppings %}
+                <input type="radio" name="BURGERID" value="{{eachTopping.id}}"/>
+                <label for="{{eachTopping.id}}">{{eachTopping.id}}: {{eachTopping.topping_name}}</label>
+            {% endfor %}
+        </div>
         <input type="submit" value="Create Burger" class="btn btn-primary btn-outline-dark">
     </form>
-
-    <form action="/add/topping" method="post">
-        {% for burger in burgers %}
-        <input type="radio" name="burger_id" value="{{burger.id}}"/>
-        <label for="{{burger.name}}">{{burger.id}}: {{burger.name}}</label>
-        <br>
-        {% endfor %}
-        <!-- do I post as for topping_name or can I dual post as burger.toppings? -->
-        <label for="topping_name">What topping would you like to add?</label>
-        <input type="text" name="topping_name" />
-
-    </select>
 </body>
 </html>

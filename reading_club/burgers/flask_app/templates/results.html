@@ -18,7 +18,11 @@
             <h2>Meat: {{ burger['meat'] }}</h2>
             <h2>Calories: {{ burger['calories'] }}</h2> 
         </div>
-            
+            <div>
+                {% for eachTopping in burger.toppings %}
+                    <h3>{{ eachTopping.topping_name }}</h3>
+                {% endfor %}
+            </div>
             <hr>
         {% endfor %}
     </div>
