@@ -54,3 +54,11 @@ def save_data_from_form_update_db():
     }
     User.update_single_user(data)
     return redirect(redirect_to_here)
+
+@app.route('/users/<user_id>/delete')
+def delete_this_user(user_id):
+    data = {
+        "id" : user_id
+    }
+    User.delete_user_from_db(data)
+    return redirect('/users')
