@@ -21,6 +21,13 @@ def redirect_success():
 
 @app.route('/new-user-post', methods=["POST"])
 def register_new_user():
+    #REGEX: 
+        #trim fields to ensure first_name, last_name and password are not empty strings
+            #fn, ln 2+ chars, password 8+ chars
+        #use pattern matching on email
+            #if not EMAIL_REGEX.match(user['email']): 
+                #flash("Invalid email address!")
+                #is_valid = False
     #see if user email already exists in DB - account for capitalization
         #if user in DB, return a message asking them to log in
     #otherwise if it is a new user,
