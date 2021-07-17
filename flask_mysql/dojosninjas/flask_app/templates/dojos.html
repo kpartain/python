@@ -54,7 +54,8 @@
                 <h2>All Dojos</h2>
                 <div>
                     {% for dojo in dojos: %}
-                        <a href="/dojos/{{dojo.id}}">{{dojo.name}}</a>
+                        <a href="/dojos/{{dojo.id}}">{{ dojo.name }}</a>
+                        <br>
                     {% endfor %}
                 </div>
                 <a href="/ninjas">Add Ninja</a>

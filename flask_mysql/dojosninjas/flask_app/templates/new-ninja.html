@@ -34,8 +34,8 @@
             <!-- DROPDOWN ONE SELECTION-->
             <div>
                 <label for="name">Dojo:</label>
-                <select name="name">
-                    {% for dojo in dojos %}
+                <select name="dojo_id">
+                {% for dojo in dojos %}
                     <option value="{{dojo.id}}">{{dojo.name}}</option>
                     {% endfor %}
                 </select>
