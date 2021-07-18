@@ -1,0 +1,27 @@
+:root{
+    --p4: #2e157d;
+    --p3:#7f5ce6;
+    --p2:#a9a3ff;
+    --p1: #ede7ff;
+}
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+input {
+    width:100%;
+}
+.prp4 {
+    color: var(--p4);
+}
+.prp3 {
+    color: var(--p3);
+}
+.prp2 {
+    background-color: var(--p2);
+}
+#nfbuttons a {
+    font-size: 3vh;
+}

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <!-- PAGE TITLE -->
+    <title></title>
+    <!-- GENERIC FAVICON -->
+    <link rel='icon' type='image/jpg' href='https://karaspersonalprojectbucket.s3.us-east-2.amazonaws.com/favicon.ico'/>
+    <!-- BOOTSTRAP/FOUNDATION -->
+    <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>
+    <!-- GOOGLE FONTS -->
+    <link rel='preconnect' href='https://fonts.googleapis.com' />
+    <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />
+    <link href='https://fonts.googleapis.com/css2?family=Montserrat&display=swap' rel='stylesheet'/>
+    <!-- FONT AWESOME -->
+    <script src="https://kit.fontawesome.com/11f04466b8.js" crossorigin="anonymous"></script>
+    <!-- LINKED CSS PAGES -->
+    <link rel='stylesheet' href='../static/css/style.css'>
+</head>
+<body>
+<!-- NAVBAR START -->
+<nav class='navbar  navbar-expand-lg navbar-light bg-light'>
+    <div class='container-fluid'>    
+        <h1 class='navbar-brand'>CodingDojo Wall</h1>
+        <!-- LOGIN -->
+        <div class='d-flex p-2' action='/login' method='POST'>
+            <h2>Welcome, {{ session['user_first_name'] }}</h2>
+            <a href="/logout-user" class='nav-link'>Logout</a>
+    </div>
+</nav>
+<!-- END NAVBAR -->
+
+<!-- PAGE CONTENT -->
+<div class='row justify-content-around no-gutters mt-5'>
+    <!-- INBOX LEFT SIDE-->
+    <div class="col-6 border-end">
+         <!-- all messages and header -->
+       <div class="px-5">
+        <!-- message header-->
+       <div>
+           <p><u>3 messages for You</u></p>
+       </div>
+       <!-- one single message-->
+        <div class='d-flex justify-content-between no-gutters mt-2'>
+            <!-- message title and content-->
+            <div>
+                <p>Biekke said (3 hours ago)</p>
+                <p class="mx-5">"I love Python. Don't you?"</p>
+            </div>
+            <!-- trash -->
+            <i class="fa fa-trash" aria-hidden="true"></i>
+        </div>
+        <!-- end one single message -->
+       <!-- one single message-->
+       <div class='d-flex justify-content-between no-gutters mt-2'>
+        <!-- message title and content-->
+        <div>
+            <p>Biekke said (3 hours ago)</p>
+            <p class="mx-5">"I love Python. Don't you?"</p>
+        </div>
+        <!-- trash -->
+        <i class="fa fa-trash" aria-hidden="true"></i>
+    </div>
+    <!-- end one single message -->
+       <!-- one single message-->
+       <div class='d-flex justify-content-between no-gutters mt-2'>
+        <!-- message title and content-->
+        <div>
+            <p>Biekke said (3 hours ago)</p>
+            <p class="mx-5">"I love Python. Don't you?"</p>
+        </div>
+        <!-- trash -->
+        <i class="fa fa-trash" aria-hidden="true"></i>
+    </div>
+    <!-- end one single message -->
+       </div>
+       <!-- end all messages-->
+    </div>
+    <!--END INBOX LEFT SIDE-->
+
+    <!-- SEND MESSAGES RIGHT SIDE-->
+    <div class='col-5'>
+        <!--Send messages Header-->
+        <div>
+            <p><u>Send Messages</u></p>
+            <p class="text-success">You have sent 12 messages so far</p>
+        </div>
+        <!-- one single send -->
+        <div class="d-flex justify-content-between align-items-center mt-2">
+            <p>Donovan</p>
+            <textarea class="flex-grow-1 mx-2"></textarea>
+            <button>Send</button>
+        </div>
+        <!-- end one single send-->
+        <!-- one single send -->
+        <div class="d-flex justify-content-between align-items-center mt-2">
+            <p>Donovan</p>
+            <textarea class="flex-grow-1 mx-2"></textarea>
+            <button>Send</button>
+        </div>
+        <!-- end one single send-->        
+        <!-- one single send -->
+        <div class="d-flex justify-content-between align-items-center mt-2">
+            <p>Donovan</p>
+            <textarea class="flex-grow-1 mx-2"></textarea>
+            <button>Send</button>
+        </div>
+        <!-- end one single send-->
+         <!-- one single send -->
+         <div class="d-flex justify-content-between align-items-center mt-2">
+            <p>Donovan</p>
+            <textarea class="flex-grow-1 mx-2"></textarea>
+            <button>Send</button>
+        </div>
+        <!-- end one single send-->       
+    </div>
+    <!-- END SEND MESSAGES RIGHT SIDE-->
+
+</div>
+<!-- END PAGE CONTENT-->
+
+</body>
+</html>
