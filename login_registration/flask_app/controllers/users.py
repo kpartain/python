@@ -7,10 +7,10 @@ bcrypt = Bcrypt(app)
 
 @app.route('/')
 def register_or_login():
-    if 'user_object' in session:
-        session['user_object'] = session['user_object']
+    if 'user' in session:
+        session['user'] = session['user']
     else:
-        session['user_object'] = ""
+        session['user'] = ""
     return render_template('register_or_login.html')
 
 @app.route('/success')
@@ -24,6 +24,8 @@ def redirect_success():
 
 @app.route('/new-user-post', methods=["GET", "POST"])
 def register_new_user():
+    if request.form['passord'] != request.form['confirm_password']:
+        flash("Passwords must match!")
     #see if user email already exists in DB - account for capitalization
     lower_case_email = request.form["email"].lower()
     email_data = { 
@@ -32,7 +34,7 @@ def register_new_user():
     user_in_db = User.get_by_email(email_data)
     #if user in DB, return a message asking them to log in
     if user_in_db:
-        flash("User found with this email - please log in")
+        flash("This email is already registered to an account - please log in.")
     elif not user_in_db: 
     #validate fields
         #if not valid, refresh. Model handles flashes.
@@ -49,6 +51,8 @@ def register_new_user():
             "email": request.form['email'],
             "password" : pw_hash
         }
+        returnedObject = User.register_and_login(data)
+        session['user'] = returnedObject
             #save the user
             #return the user saved
             #save this as session['user_object']
@@ -64,17 +68,19 @@ def login_existing_user():
     user_in_db = User.get_by_email(email_data)
     # user is not registered in the db
     if not user_in_db:
-        flash("Invalid Email/Password")
+        flash("Invalid Email")
         return redirect("/")
     if not bcrypt.check_password_hash(user_in_db.password, request.form['password']):
         # if we get False after checking the password
-        flash("Invalid Email/Password")
+        flash("Invalid Password")
         return redirect('/')
     # if the passwords matched, we set the user_id into session
-    session['user_id'] = user_in_db.id
+    session['user'] = user_in_db
     return redirect('/success')
 
 @app.route('/logout-user')
 def log_user_out():
     #clear session
+    session.clear()
+    session['user'] = ""
     return redirect('/')

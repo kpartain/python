@@ -9,7 +9,9 @@ class User:
         self.first_name = data['first_name']
         self.last_name = data['last_name']
         self.email = data['email']
-        #password?
+        self.password = data['password']
+        self.created_at = data['created_at']
+        self.updated_at = data['updated_at']
 
     @staticmethod
     def validate_user(form_data):
@@ -47,23 +49,40 @@ class User:
             flash("Password must be more than 8 characters")
             is_valid = False
         return is_valid
-        
+    
     @classmethod
-    def add_new_user(cls, data):
-        #validate user data
-        #save to DB
-        #return user object to session
-        return true
+    def register_and_login(cls, data):
+        returned_id = User.add_new_user(data)
+        user_obj = User.get_registered_user_by_id(returned_id)
+        return user_obj
 
     @classmethod
-    def get_registered_user(cls, data):
-        #validate user data
+    def add_new_user(cls, data):
+        #save to DB with query
+        query = "INSERT INTO users (first_name, last_name, email, password) VALUES (%(first_name)s, %(last_name)s, %(email)s, %(password)s);"
+        db_result = connectToMySQL('registration').query_db(query, data)
+        #return user ID which is returned from query
+        return db_result
+
+    @classmethod
+    def get_registered_user_by_id(cls, data):
         #get data from DB
-        query = "SELECT user.first_name, user.last_name FROM users WHERE "
+        dict = {
+            "id": data
+        }
+        query = "SELECT * FROM users WHERE id = %(id)s;"
+        db_response = connectToMySQL('registration').query_db(query, dict)
+        user_obj = cls(db_response[0])
         #return user object to session
-        return true
+        return user_obj
 
     @classmethod
     def get_by_email(cls, data):
         query = "select * from users where lower(email) LIKE %(email)s;"
+        db_response = connectToMySQL('registration').query_db(query, data)
+        if len(db_response) != 1:
+            return False
+        else: 
+            response_user_object = cls(db_response[0])
+            return response_user_object
         
