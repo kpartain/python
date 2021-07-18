@@ -54,6 +54,7 @@ class User:
     def register_and_login(cls, data):
         returned_id = User.add_new_user(data)
         user_obj = User.get_registered_user_by_id(returned_id)
+        print("register and login result object", user_obj)
         return user_obj
 
     @classmethod
@@ -61,6 +62,7 @@ class User:
         #save to DB with query
         query = "INSERT INTO users (first_name, last_name, email, password) VALUES (%(first_name)s, %(last_name)s, %(email)s, %(password)s);"
         db_result = connectToMySQL('registration').query_db(query, data)
+        print("Add new user result", db_result)
         #return user ID which is returned from query
         return db_result
 
@@ -73,6 +75,7 @@ class User:
         query = "SELECT * FROM users WHERE id = %(id)s;"
         db_response = connectToMySQL('registration').query_db(query, dict)
         user_obj = cls(db_response[0])
+        print("get registered user obj result", user_obj)
         #return user object to session
         return user_obj
 

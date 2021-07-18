@@ -7,20 +7,18 @@ bcrypt = Bcrypt(app)
 
 @app.route('/')
 def register_or_login():
-    if 'user' in session:
-        session['user'] = session['user']
+    if 'user_first_name' in session:
+        session['user_first_name'] = session['user_first_name']
     else:
-        session['user'] = ""
+        session['user_first_name'] = ""
     return render_template('register_or_login.html')
 
 @app.route('/success')
 def redirect_success():
-    render_response = ""
-    #if session['user_object'] is empty, 
-        #render "register_or_success.html"
-    #otherwise, if session has a user, 
-        #render "success.html"
-    return render_template(render_response)
+    if session['user_first_name'] == "":
+        return redirect('/')
+    else:
+        return render_template("success.html")
 
 @app.route('/new-user-post', methods=["GET", "POST"])
 def register_new_user():
@@ -57,7 +55,7 @@ def register_new_user():
         }
     returnedObject = User.register_and_login(data)
     print("OBJ after PWHASH", returnedObject)
-    session['user'] = returnedObject
+    session['user_first_name'] = returnedObject.first_name
     return redirect('/success')
 
 @app.route('/login-existing-user-post', methods=["POST"])
@@ -76,7 +74,7 @@ def login_existing_user():
         flash("Invalid Password")
         return redirect('/')
     # if the passwords matched, we set the user_id into session
-    session['user'] = user_in_db
+    session['user_first_name'] = user_in_db.first_name
     return redirect('/success')
 
 @app.route('/logout-user')
