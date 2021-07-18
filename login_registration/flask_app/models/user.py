@@ -1,6 +1,8 @@
 from flask_app.config.mysqlconnection import connectToMySQL
+from flask import flash
 import re
 
+EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$') 
 class User:
     def __init__(self, data):
         self.id = data['id']
@@ -10,11 +12,34 @@ class User:
         #password?
 
     @staticmethod
-    def validate_user( user ):
+    def validate_user(form_data):
         is_valid = True
-        # test whether a field matches the pattern
-        if not EMAIL_REGEX.match(user['email']): 
+        fn = form_data['first_name'].strip()
+        ln = form_data['last_name'].strip()
+        em = form_data['email'].strip()
+        # email
+        if not EMAIL_REGEX.match(em): 
             flash("Invalid email address!")
+            is_valid = False
+        #first_name
+        if fn.isalpha() is False and len(fn) < 2:
+            flash("First name should be at least two characters and only include letters")
+            is_valid = False
+        if fn.isalpha() is False and len(fn) >= 2:
+            flash("First name should only include letters")
+            is_valid = False
+        if fn.isAlpha() is True and len(fn) < 2:
+            flash("First name should be two characters or longer")
+            is_valid = False
+        #last_name
+        if fn.isalpha() is False and len(fn) < 2:
+            flash("First name should be at least two characters and only include letters")
+            is_valid = False
+        if fn.isalpha() is False and len(fn) >= 2:
+            flash("First name should only include letters")
+            is_valid = False
+        if fn.isAlpha() is True and len(fn) < 2:
+            flash("First name should be two characters or longer")
             is_valid = False
         return is_valid
         

@@ -1,5 +1,6 @@
 from flask_app import app
-from flask import render_template,redirect,request,session,flash
+from flask import render_template,redirect,request,flash
+#gets session from __init__.py ?? or add back?
 from flask_app.models.user import User
 
 @app.route('/')
@@ -19,15 +20,13 @@ def redirect_success():
         #render "success.html"
     return render_template(render_response)
 
-@app.route('/new-user-post', methods=["POST"])
+@app.route('/new-user-post', methods=["GET", "POST"])
 def register_new_user():
-    #REGEX: 
-        #trim fields to ensure first_name, last_name and password are not empty strings
-            #fn, ln 2+ chars, password 8+ chars
-        #use pattern matching on email
-            #if not EMAIL_REGEX.match(user['email']): 
-                #flash("Invalid email address!")
-                #is_valid = False
+    #trim fields to ensure first_name, last_name and password are not empty strings
+        #fn, ln 2+ chars, password 8+ chars
+    #validate email
+    if not User.validate_user(request.form):
+        return redirect('/')
     #see if user email already exists in DB - account for capitalization
         #if user in DB, return a message asking them to log in
     #otherwise if it is a new user,
