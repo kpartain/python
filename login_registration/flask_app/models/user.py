@@ -16,10 +16,22 @@ class User:
     @staticmethod
     def validate_user(form_data):
         is_valid = True
+        lower_case_email = form_data["email"].lower()
+        print("LOWEREMAIL", lower_case_email)
+        email_data = { 
+            "email" : lower_case_email
+        }
+        user_in_db = User.get_by_email(email_data)
+        print("UserinDB", user_in_db)
+        #if user in DB, return a message asking them to log in
+        if user_in_db is True :
+            flash("This email is already registered to an account - please log in.")
+            is_valid = False
         fn = form_data['first_name'].strip()
         ln = form_data['last_name'].strip()
         em = form_data['email'].strip()
         pw = form_data['password']
+        pw2 = form_data['confirm_password']
         # email
         if not EMAIL_REGEX.match(em): 
             flash("Invalid email address!")
@@ -36,17 +48,20 @@ class User:
             is_valid = False
         #last_name
         if ln.isalpha() is False and len(fn) < 2:
-            flash("First name should be at least two characters and only include letters")
+            flash("Last name should be at least two characters and only include letters")
             is_valid = False
         if ln.isalpha() is False and len(fn) >= 2:
-            flash("First name should only include letters")
+            flash("Last should only include letters")
             is_valid = False
         if ln.isalpha() is True and len(fn) < 2:
-            flash("First name should be two characters or longer")
+            flash("Last name should be two characters or longer")
             is_valid = False
         #password
         if len(pw) < 8:
             flash("Password must be more than 8 characters")
+            is_valid = False
+        if pw != pw2:
+            flash("Passwords must match!")
             is_valid = False
         return is_valid
     

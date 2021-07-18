@@ -18,7 +18,9 @@
     <link rel='stylesheet' href='../static/css/style.css'>
 </head>
 <body>
-<!-- If redirected from registration, show "You've been successfully registered!"-->
+<div class="alert alert-success" role="alert">
+    {{ session['success_message'] }}
+</div>
 <h2>Welcome, you've been logged in, {{ session['user_first_name'] }}</h2>
 <a href="/logout-user">Logout</a>
 </body>

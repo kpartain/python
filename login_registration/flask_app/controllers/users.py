@@ -22,26 +22,8 @@ def redirect_success():
 
 @app.route('/new-user-post', methods=["GET", "POST"])
 def register_new_user():
-    pw1 = request.form['password']
-    print("PW1", pw1)
-    pw2 = request.form['confirm_password']
-    print("PW2",pw2)
-    if pw1 != pw2:
-        flash("Passwords must match!")
-        return redirect('/')
     #see if user email already exists in DB - account for capitalization
-    lower_case_email = request.form["email"].lower()
-    print("LOWEREMAIL", lower_case_email)
-    email_data = { 
-        "email" : lower_case_email
-        }
-    user_in_db = User.get_by_email(email_data)
-    print("UserinDB", user_in_db)
-        #if user in DB, return a message asking them to log in
-    if user_in_db is True :
-            flash("This email is already registered to an account - please log in.")
-            return redirect('/')
-    if not User.validate_user(request.form):
+    if User.validate_user(request.form) == False:
                 return redirect('/')
     #OTHERWISE, if it is valid,hash the password
     pw_hash = bcrypt.generate_password_hash(request.form['password'])
@@ -56,6 +38,7 @@ def register_new_user():
     returnedObject = User.register_and_login(data)
     print("OBJ after PWHASH", returnedObject)
     session['user_first_name'] = returnedObject.first_name
+    session['success_message'] = "You've been successfully registered!"
     return redirect('/success')
 
 @app.route('/login-existing-user-post', methods=["POST"])
@@ -75,6 +58,7 @@ def login_existing_user():
         return redirect('/')
     # if the passwords matched, we set the user_id into session
     session['user_first_name'] = user_in_db.first_name
+    session['success_message'] = "You've been logged in!"
     return redirect('/success')
 
 @app.route('/logout-user')
