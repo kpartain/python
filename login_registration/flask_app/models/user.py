@@ -17,6 +17,7 @@ class User:
         fn = form_data['first_name'].strip()
         ln = form_data['last_name'].strip()
         em = form_data['email'].strip()
+        pw = form_data['password']
         # email
         if not EMAIL_REGEX.match(em): 
             flash("Invalid email address!")
@@ -32,14 +33,18 @@ class User:
             flash("First name should be two characters or longer")
             is_valid = False
         #last_name
-        if fn.isalpha() is False and len(fn) < 2:
+        if ln.isalpha() is False and len(fn) < 2:
             flash("First name should be at least two characters and only include letters")
             is_valid = False
-        if fn.isalpha() is False and len(fn) >= 2:
+        if ln.isalpha() is False and len(fn) >= 2:
             flash("First name should only include letters")
             is_valid = False
-        if fn.isAlpha() is True and len(fn) < 2:
+        if ln.isAlpha() is True and len(fn) < 2:
             flash("First name should be two characters or longer")
+            is_valid = False
+        #password
+        if len(pw) < 8:
+            flash("Password must be more than 8 characters")
             is_valid = False
         return is_valid
         
@@ -57,3 +62,8 @@ class User:
         query = "SELECT user.first_name, user.last_name FROM users WHERE "
         #return user object to session
         return true
+
+    @classmethod
+    def get_by_email(cls, data):
+        query = "select * from users where lower(email) LIKE %(email)s;"
+        
