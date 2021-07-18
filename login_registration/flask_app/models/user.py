@@ -17,7 +17,6 @@ class User:
     def validate_user(form_data):
         is_valid = True
         lower_case_email = form_data["email"].lower()
-        print("LOWEREMAIL", lower_case_email)
         email_data = { 
             "email" : lower_case_email
         }
@@ -68,6 +67,7 @@ class User:
     @classmethod
     def register_and_login(cls, data):
         returned_id = User.add_new_user(data)
+        print("register and login result ID", returned_id)
         user_obj = User.get_registered_user_by_id(returned_id)
         print("register and login result object", user_obj)
         return user_obj

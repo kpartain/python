@@ -106,6 +106,16 @@
                 <!-- LOGIN-->
                 <h2>Login here!</h2>
                 <!-- Login Errors-->
+                {% with messages = get_flashed_messages() %}
+                <!-- check if there are any messages -->
+                {% if messages %}
+                    <!-- loop through the messages -->
+                    {% for message in messages %}
+                        <!-- display each message in a paragraph tag -->
+                        <p class="alert alert-danger">{{message}}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
                 <form action="/login-existing-user-post" method="POST">
                     <!-- TEXT INPUT -->
                     <div>
