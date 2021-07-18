@@ -4,3 +4,8 @@ from flask_app.controllers.users import users
 
 if __name__=="__main__":
     app.run(debug=True)
+
+#pipenv install Flask PyMySQL
+#pipenv shell
+#pipenv install flask-bcrypt
+#python3 server.py
