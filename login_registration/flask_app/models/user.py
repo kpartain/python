@@ -87,5 +87,5 @@ class User:
         if len(db_response) != 1:
             return False
         else: 
-            return True
+            return cls(db_response[0])
         

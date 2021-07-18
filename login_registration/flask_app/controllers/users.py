@@ -81,5 +81,5 @@ def login_existing_user():
 def log_user_out():
     #clear session
     session.clear()
-    session['user'] = ""
+    session['user_first_name'] = ""
     return redirect('/')
