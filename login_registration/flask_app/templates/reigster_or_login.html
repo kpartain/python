@@ -38,6 +38,7 @@
                 <!-- REGISTER -->
                 <h2>Register here!</h2>
                 <!-- Registration Errors -->
+                {% codeblock %}
                 {% with errors = get_flashed_messages(category_filter=["error"]) %}
                 {% if errors %}
                 <div class="alert-message block-message error">
@@ -50,6 +51,7 @@
                 </div>
                 {% endif %}
                 {% endwith %}
+                {% endcodeblock %}
                 <form action="/new-user-post" method="POST">
                     <!-- TEXT INPUT -->
                     <div>
@@ -97,11 +99,12 @@
                             required
                         />
                     </div>
-                    <!-- BUTTON -->
+                    <!-- BUTTONS -->
                     <div>
                         <button class="btn btn-primary" type="submit">
                             Register!
                         </button>
+                        <button class="btn btn-outline-secondary" type="reset">Clear</button>
                     </div>
                 </form>
             </div>
@@ -131,6 +134,7 @@
                         <button class="btn btn-primary" type="submit">
                             Login
                         </button>
+                        <button class="btn btn-outline-secondary" type="reset">Clear</button>
                     </div>
                 </form>
             </div>
