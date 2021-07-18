@@ -38,7 +38,6 @@
                 <!-- REGISTER -->
                 <h2>Register here!</h2>
                 <!-- Registration Errors -->
-                {% codeblock %}
                 {% with errors = get_flashed_messages(category_filter=["error"]) %}
                 {% if errors %}
                 <div class="alert-message block-message error">
@@ -51,14 +50,13 @@
                 </div>
                 {% endif %}
                 {% endwith %}
-                {% endcodeblock %}
                 <form action="/new-user-post" method="POST">
                     <!-- TEXT INPUT -->
                     <div>
                         <label for="first_name">First name: </label>
                         <input
                             type="text"
-                            name="email"
+                            name="first_name"
                             value=""
                             minlength="2"
                             required
@@ -69,7 +67,7 @@
                         <label for="last_name">Last Name: </label>
                         <input
                             type="text"
-                            name="email"
+                            name="last_name"
                             value=""
                             minlength="2"
                             required
@@ -93,8 +91,8 @@
                     <div class="mt-3">
                         <label for="confirm_password">Confirm password: </label>
                         <input
-                            type="confirm_password"
-                            name="password"
+                            type="password"
+                            name="confirm_password"
                             value=""
                             required
                         />

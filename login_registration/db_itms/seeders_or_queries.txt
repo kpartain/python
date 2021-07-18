@@ -1,0 +1,5 @@
+alter table users modify password varchar(255);
+>change the length of accepted characters 
+
+select * from users;
+>view all

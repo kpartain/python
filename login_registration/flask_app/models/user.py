@@ -31,7 +31,7 @@ class User:
         if fn.isalpha() is False and len(fn) >= 2:
             flash("First name should only include letters")
             is_valid = False
-        if fn.isAlpha() is True and len(fn) < 2:
+        if fn.isalpha() is True and len(fn) < 2:
             flash("First name should be two characters or longer")
             is_valid = False
         #last_name
@@ -41,7 +41,7 @@ class User:
         if ln.isalpha() is False and len(fn) >= 2:
             flash("First name should only include letters")
             is_valid = False
-        if ln.isAlpha() is True and len(fn) < 2:
+        if ln.isalpha() is True and len(fn) < 2:
             flash("First name should be two characters or longer")
             is_valid = False
         #password
@@ -80,9 +80,9 @@ class User:
     def get_by_email(cls, data):
         query = "select * from users where lower(email) LIKE %(email)s;"
         db_response = connectToMySQL('registration').query_db(query, data)
+        print("DBResp get by email", db_response)
         if len(db_response) != 1:
             return False
         else: 
-            response_user_object = cls(db_response[0])
-            return response_user_object
+            return True
         
