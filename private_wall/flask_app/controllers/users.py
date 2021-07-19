@@ -14,6 +14,15 @@ def register_or_login():
         session['user_id'] = session['user_id']
     else:
         session['user_id'] = ""
+    #if there is nobody logged in, start a session for registration data so they can correct
+    #any errors rather than type everything again 
+    if session['user_id'] is "":
+        if 'first_name' not in session:
+            session['first_name'] = ""
+        if 'last_name' not in session:
+            session['last_name']
+        if 'email' not in session:
+            session['email']
     return render_template('register_or_login.html')
 
 @app.route('/success')
@@ -25,9 +34,13 @@ def redirect_success():
 
 @app.route('/new-user-post', methods=["GET", "POST"])
 def register_new_user():
-    #see if user email already exists in DB - account for capitalization
+    #if there are errors, save the current input to session except password
+    #this way user can correct mistake rather than retype it
     if User.validate_user(request.form) == False:
-                return redirect('/')
+        session['first_name'] = request.form['first_name']
+        session['last_name'] = request.form['last_name']
+        session['email'] = request.form['email']
+        return redirect('/')
     #OTHERWISE, if it is valid,hash the password
     pw_hash = bcrypt.generate_password_hash(request.form['password'])
     print("PWHASH",pw_hash)
@@ -38,6 +51,9 @@ def register_new_user():
         "email": request.form['email'],
         "password" : pw_hash
         }
+    session['first_name'] = request.form['first_name']
+    session['last_name'] = request.form['last_name']
+    session['email'] = request.form['email']
     returnedObject = User.register_and_login(data)
     print("OBJ after PWHASH", returnedObject)
     session['user_first_name'] = returnedObject.first_name
@@ -73,3 +89,4 @@ def log_user_out():
     session['user_id'] = ""
     session['user_first_name'] = ""
     return redirect('/')
+

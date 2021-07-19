@@ -40,41 +40,23 @@
        <div class="px-5">
         <!-- message header-->
        <div>
-           <p><u>3 messages for You</u></p>
+           <p><u>{{ number_of_messages }} messages for You</u></p>
        </div>
+       {% for each_message in list_of_messages %}
        <!-- one single message-->
         <div class='d-flex justify-content-between no-gutters mt-2'>
             <!-- message title and content-->
             <div>
-                <p>Biekke said (3 hours ago)</p>
-                <p class="mx-5">"I love Python. Don't you?"</p>
+                <p>{{ each_message.sender_name }} said at {{ each_message.created_at }}</p>
+                <p class="mx-5">{{ each_message.message }}</p>
             </div>
             <!-- trash -->
-            <i class="fa fa-trash" aria-hidden="true"></i>
+            <a href="/delete-this-message/{{each_message.id}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
         </div>
         <!-- end one single message -->
-       <!-- one single message-->
-       <div class='d-flex justify-content-between no-gutters mt-2'>
-        <!-- message title and content-->
-        <div>
-            <p>Biekke said (3 hours ago)</p>
-            <p class="mx-5">"I love Python. Don't you?"</p>
-        </div>
-        <!-- trash -->
-        <i class="fa fa-trash" aria-hidden="true"></i>
-    </div>
-    <!-- end one single message -->
-       <!-- one single message-->
-       <div class='d-flex justify-content-between no-gutters mt-2'>
-        <!-- message title and content-->
-        <div>
-            <p>Biekke said (3 hours ago)</p>
-            <p class="mx-5">"I love Python. Don't you?"</p>
-        </div>
-        <!-- trash -->
-        <i class="fa fa-trash" aria-hidden="true"></i>
-    </div>
-    <!-- end one single message -->
+        {% endfor %}
+
+
        </div>
        <!-- end all messages-->
     </div>
@@ -87,34 +69,23 @@
             <p><u>Send Messages</u></p>
             <p class="text-success">You have sent 12 messages so far</p>
         </div>
+
+        {% for each_user in all_users %}
         <!-- one single send -->
+        <form action="/{{session['user_id']}}/to/{{each_user.id}}" method="POST">
         <div class="d-flex justify-content-between align-items-center mt-2">
-            <p>Donovan</p>
-            <textarea class="flex-grow-1 mx-2"></textarea>
-            <button>Send</button>
+            <p>{{each_user.first_name}}</p>
+            <input class="flex-grow-1 mx-2" type="textarea" name="message" value="">
+            <!-- <textarea class="flex-grow-1 mx-2"></textarea> -->
+            <button class="btn btn-primary" type="submit">Send</button>
+            <button class="btn btn-outline-secondary" type="reset">
+                Clear
+            </button>
         </div>
         <!-- end one single send-->
-        <!-- one single send -->
-        <div class="d-flex justify-content-between align-items-center mt-2">
-            <p>Donovan</p>
-            <textarea class="flex-grow-1 mx-2"></textarea>
-            <button>Send</button>
-        </div>
-        <!-- end one single send-->        
-        <!-- one single send -->
-        <div class="d-flex justify-content-between align-items-center mt-2">
-            <p>Donovan</p>
-            <textarea class="flex-grow-1 mx-2"></textarea>
-            <button>Send</button>
-        </div>
-        <!-- end one single send-->
-         <!-- one single send -->
-         <div class="d-flex justify-content-between align-items-center mt-2">
-            <p>Donovan</p>
-            <textarea class="flex-grow-1 mx-2"></textarea>
-            <button>Send</button>
-        </div>
-        <!-- end one single send-->       
+        </form>
+        {% endfor %}
+
     </div>
     <!-- END SEND MESSAGES RIGHT SIDE-->
 

@@ -254,13 +254,13 @@ class SLList {
 
 //REMOVE NEGATIVES
 // H: -1 -> 5 -> 7 -> -3 -> 4 -> will become H: 5 -> 7 -> 4 ->
-var t1 = new SLList();
-t1.addToFront(4).addToFront(-3).addToFront(7).addToFront(5).addToFront(-1);
-console.log("******BEFORE********");
-console.log(t1.printAll());
-t1.removeNegatives();
-console.log("******AFTER********");
-console.log(t1.printAll());
+// var t1 = new SLList();
+// t1.addToFront(4).addToFront(-3).addToFront(7).addToFront(5).addToFront(-1);
+// console.log("******BEFORE********");
+// console.log(t1.printAll());
+// t1.removeNegatives();
+// console.log("******AFTER********");
+// console.log(t1.printAll());
 // H: 7 -> -4 -> -3 -> -2 -> will become H: 7 ->
 // var t2 = new SLList();
 // t2.addToFront(-2).addToFront(-3).addToFront(-4).addToFront(7);
@@ -285,28 +285,28 @@ console.log(t1.printAll());
 // console.log("******AFTER********")
 // console.log(t4)
 
-// //SECOND TO LAST VALUE 
-// // EXAMPLES:
-// // H: 10 -> 9 -> 4 -> 1 ->  would return 4
-// var t5 = new SLList();
-// t5.addToFront(1).addToFront(4).addToFront(9).addToFront(10);
-// console.log("******BEFORE********")
-// console.log(t5)
-// var t5return = t5.secondToLastValue()
-// console.log("******AFTER********")
-// console.log(t5return)
-// // H: (empty list) would return false
-// var t6 = new SLList();
-// console.log("******BEFORE********")
-// console.log(t6)
-// var t6return = t6.secondToLastValue()
-// console.log("******AFTER********")
-// console.log(t6return)
-// // H: 10 -> would return false
-// var t7 = new SLList();
-// t7.addToFront(10)
-// console.log("******BEFORE********")
-// console.log(t7)
-// var t7return = t7.secondToLastValue();
-// console.log("******AFTER********");
-// console.log(t7return);
+//SECOND TO LAST VALUE 
+// EXAMPLES:
+// H: 10 -> 9 -> 4 -> 1 ->  would return 4
+var t5 = new SLList();
+t5.addToFront(1).addToFront(4).addToFront(9).addToFront(10);
+console.log("******BEFORE********")
+console.log(t5)
+var t5return = t5.secondToLastValue()
+console.log("******AFTER********")
+console.log(t5return)
+// H: (empty list) would return false
+var t6 = new SLList();
+console.log("******BEFORE********")
+console.log(t6)
+var t6return = t6.secondToLastValue()
+console.log("******AFTER********")
+console.log(t6return)
+// H: 10 -> would return false
+var t7 = new SLList();
+t7.addToFront(10)
+console.log("******BEFORE********")
+console.log(t7)
+var t7return = t7.secondToLastValue();
+console.log("******AFTER********");
+console.log(t7return);

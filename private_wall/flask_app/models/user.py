@@ -14,7 +14,6 @@ class User:
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
         self.recieved_messages= []
-        self.sent_messages = []
 
     @staticmethod
     def validate_user(form_data):
@@ -27,44 +26,48 @@ class User:
         print("UserinDB", user_in_db)
         #if user in DB, return a message asking them to log in
         if user_in_db is True :
-            flash("This email is already registered to an account - please log in.")
+            flash("This email is already registered to an account - please log in.", "email")
             is_valid = False
         fn = form_data['first_name'].strip()
         ln = form_data['last_name'].strip()
         em = form_data['email'].strip()
         pw = form_data['password']
         pw2 = form_data['confirm_password']
-        # email
+        #email----------------------------------------------------------------------------------------
         if not EMAIL_REGEX.match(em): 
-            flash("Invalid email address!")
+            flash("Invalid email address!", "email")
             is_valid = False
-        #first_name
+        #first_name----------------------------------------------------------------------------------------
+        #account for hyphens/spaces?? switch to regex
         if fn.isalpha() is False and len(fn) < 2:
-            flash("First name should be at least two characters and only include letters")
+            flash("First name should be at least two characters and only include letters", "first_name")
             is_valid = False
-        if fn.isalpha() is False and len(fn) >= 2:
-            flash("First name should only include letters")
+        elif fn.isalpha() is False and len(fn) >= 2:
+            flash("First name should only include letters", "first_name")
             is_valid = False
-        if fn.isalpha() is True and len(fn) < 2:
-            flash("First name should be two characters or longer")
+        elif fn.isalpha() is True and len(fn) < 2:
+            flash("First name should be two characters or longer", "first_name")
             is_valid = False
-        #last_name
+        #last_name----------------------------------------------------------------------------------------
+        #account for hyphens/spaces?? switch to regex
         if ln.isalpha() is False and len(fn) < 2:
-            flash("Last name should be at least two characters and only include letters")
+            flash("Last name should be at least two characters and only include letters", "last_name")
             is_valid = False
-        if ln.isalpha() is False and len(fn) >= 2:
-            flash("Last should only include letters")
+        elif ln.isalpha() is False and len(fn) > 1:
+            flash("Last should only include letters", "last_name")
             is_valid = False
-        if ln.isalpha() is True and len(fn) < 2:
-            flash("Last name should be two characters or longer")
+        elif ln.isalpha() is True and len(fn) < 2:
+            flash("Last name should be two characters or longer", "last_name")
             is_valid = False
-        #password
-        if len(pw) < 8:
-            flash("Password must be more than 8 characters")
+        #password----------------------------------------------------------------------------------------
+        if len(pw) < 8 and pw == pw2:
+            flash("Password must be at least 8 characters", "password")
             is_valid = False
-        if pw != pw2:
-            flash("Passwords must match!")
+        elif len(pw) > 7 and pw != pw2:
+            flash("Passwords must match!", "password")
             is_valid = False
+        elif len(pw)<8 and pw != pw2:
+            flash("Passwords should match and be at least 8 characters!", "password")
         return is_valid
     
     @classmethod
@@ -119,3 +122,13 @@ class User:
         recieved_messages = Message.get_messages_by_recipient_id(data)
         print("recieved msgs in user class", recieved_messages)
         return recieved_messages
+
+    @classmethod
+    def find_all_users(cls):
+        query = "select * from users;"
+        db_response = connectToMySQL('private_wall').query_db(query)
+        all_users = []
+        for each_response in db_response:
+            make_a_user = cls(each_response)
+            all_users.append(make_a_user)
+        return all_users
