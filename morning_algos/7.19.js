@@ -214,19 +214,28 @@ class SLList {
     }
 
     removeNegatives(){
-        var starter = this.head;
-        var runner = starter.next;
-        while (runner != null) {
-            if(starter.value < 0) {
-                starter = starter.next;
-                while (starter.next.value <0 ){
-                  starter = starter.next;
-                }
-                
-            }
-            starter = starter.next;
-            runner = runner.next;
+        if(this.head == null) {
+            return false;
         }
+        var lagger = null;
+        var leader = this.head;
+        while(leader != null) {
+            if(leader.value < 0) {
+                leader = leader.next;
+                lagger = leader;
+                if (leader.next == null) {
+                    return this;
+                } else {
+                    leader = leader.next;
+                }
+            }
+            lagger = leader;
+            if(leader.next == null){
+                return this;
+            }     
+            leader = leader.next;
+        }
+        return this;
     }
 
     secondToLastValue(){
@@ -253,28 +262,28 @@ t1.removeNegatives();
 console.log("******AFTER********");
 console.log(t1.printAll());
 // H: 7 -> -4 -> -3 -> -2 -> will become H: 7 ->
-var t2 = new SLList();
-t2.addToFront(-2).addToFront(-3).addToFront(-4).addToFront(7);
-console.log("******BEFORE********");
-console.log(t2.printAll());
-t2.removeNegatives();
-console.log("******AFTER********");
-console.log(t2.printAll());
+// var t2 = new SLList();
+// t2.addToFront(-2).addToFront(-3).addToFront(-4).addToFront(7);
+// console.log("******BEFORE********");
+// console.log(t2.printAll());
+// t2.removeNegatives();
+// console.log("******AFTER********");
+// console.log(t2.printAll());
 // H: -10 -> -7 -> -4 -> will become H: (an empty list)
-var t3 = new SLList();
-t3.addToFront(-4).addToFront(-7).addToFront(-10)
-console.log("******BEFORE********")
-console.log(t3.printAll())
-t3.removeNegatives()
-console.log("******AFTER********")
-console.log(t3.printAll())
+// var t3 = new SLList();
+// t3.addToFront(-4).addToFront(-7).addToFront(-10)
+// console.log("******BEFORE********")
+// console.log(t3.printAll())
+// t3.removeNegatives()
+// console.log("******AFTER********")
+// console.log(t3.printAll())
 // : (empty list) will become H: (empty list)
-var t4 = new SLList();
-console.log("******BEFORE********")
-console.log(t4)
-t1.removeNegatives()
-console.log("******AFTER********")
-console.log(t4)
+// var t4 = new SLList();
+// console.log("******BEFORE********")
+// console.log(t4)
+// t1.removeNegatives()
+// console.log("******AFTER********")
+// console.log(t4)
 
 // //SECOND TO LAST VALUE 
 // // EXAMPLES:
