@@ -13,7 +13,7 @@ class User:
         self.password = data['password']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
-        self.recieved_messages = []
+        self.recieved_messages= []
         self.sent_messages = []
 
     @staticmethod
@@ -94,6 +94,8 @@ class User:
         db_response = connectToMySQL('private_wall').query_db(query, dict)
         user_obj = cls(db_response[0])
         print("get registered user obj result", user_obj)
+        user_obj.recieved_messages = user_obj.get_this_users_recieved_messages(user_obj.id)
+        print("get registered user and messages", user_obj)
         #return user object to session
         return user_obj
 
@@ -105,5 +107,15 @@ class User:
         if len(db_response) != 1:
             return False
         else: 
-            return cls(db_response[0])
-        
+            user_object = cls(db_response[0])
+            print("get by email object", user_object)
+            user_object.recieved_messages = Message.get_this_users_recieved_messages(user_object.id)
+            print("get by email object with msgs", user_object)
+            return user_object
+    
+    @classmethod
+    def get_this_users_recieved_messages(cls, data):
+        #controller will hand this data of the logged in user's ID
+        recieved_messages = Message.get_messages_by_recipient_id(data)
+        print("recieved msgs in user class", recieved_messages)
+        return recieved_messages

@@ -1,6 +1,5 @@
 from flask_app import app
 from flask import render_template,redirect,request,flash, session
-#gets session from __init__.py ?? or add back?
 from flask_app.models.user import User
 from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
@@ -11,6 +10,10 @@ def register_or_login():
         session['user_first_name'] = session['user_first_name']
     else:
         session['user_first_name'] = ""
+    if 'user_id' in session:
+        session['user_id'] = session['user_id']
+    else:
+        session['user_id'] = ""
     return render_template('register_or_login.html')
 
 @app.route('/success')
@@ -38,6 +41,7 @@ def register_new_user():
     returnedObject = User.register_and_login(data)
     print("OBJ after PWHASH", returnedObject)
     session['user_first_name'] = returnedObject.first_name
+    session['user_id'] = returnedObject['id']
     session['success_message'] = "You've been successfully registered!"
     return redirect('/success')
 
@@ -58,6 +62,7 @@ def login_existing_user():
         return redirect('/')
     # if the passwords matched, we set the user_id into session
     session['user_first_name'] = user_in_db.first_name
+    session['user_id'] = user_in_db.id
     session['success_message'] = "You've been logged in!"
     return redirect('/success')
 
@@ -65,5 +70,6 @@ def login_existing_user():
 def log_user_out():
     #clear session
     session.clear()
+    session['user_id'] = ""
     session['user_first_name'] = ""
     return redirect('/')
