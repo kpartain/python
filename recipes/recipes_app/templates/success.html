@@ -21,9 +21,9 @@
 <nav class='navbar  navbar-expand-lg navbar-light bg-light'>
     <div class='container-fluid'>
         <!-- LEFT: Welcome Name! -->
-        <a class='navbar-brand'>Welcome{{ session['user_first_name' }} </a>
+        <a class='navbar-brand'>Welcome {{ session['user_first_name'] }}!</a>
         <!-- RIGHT: Links -->
-        <span class='d-flex p-2' action='/login' method='POST'>
+        <span class='d-flex p-2 gap-3' action='/login' method='POST'>
             <a href="/recipes/new">Create</a>
             <a href="/logout-user">Logout</a>
         </span>
@@ -42,22 +42,27 @@
     </thead>
     <tbody>
         <!-- one row -->
+        {% for recipe in all_recipes %}
         <tr>
             <!-- Recipe Name-->
             <td>{{ recipe.name }}</td>
-            <!-- Recipe Time - True = yes under 30, False = no, not under 30-->
-            {% if recipe.quick %}
+            <!-- Recipe Time - True/Yes/1 False/No/0-->
+            {% if recipe.quick == 1 %}
                 <td>Yes</td>
             {% else %}
                 <td>No</td>
             {% endif %}
             <!-- Recipe links: show page, edit page, delete button-->
             <td>
-                <a href="/recipes/{{recipe.id}}">view instructions</a> | 
-                <a href="/recipes/edit/{{recipe.id}}">edit</a> | 
+                <a href="/recipes/{{recipe.id}}">view instructions</a>
+                <!-- if the user wrote the recipe, show these -->
+                {% if recipe.user_id == session['user_id'] %}
+                <a href="/recipes/edit/{{recipe.id}}">edit</a> 
                 <a href="/delete-recipe/{{recipe.id}}">delete</a>
+                {% endif %}
             </td>
         </tr>
+        {% endfor %}
     </tbody>
 </table>
 </body>

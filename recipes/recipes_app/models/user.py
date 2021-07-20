@@ -1,4 +1,4 @@
-from flask_app.config.mysqlconnection import connectToMySQL
+from recipes_app.config.mysqlconnection import connectToMySQL
 from flask import flash
 import re
 #the hashing and validation is removed from server
@@ -45,36 +45,37 @@ class User:
         if not EMAIL_REGEX.match(em): 
             flash("Invalid email address!", "email")
             is_valid = False
-        elif User.get_by_email(form_data['email']) is True:
-            flash("This email is registered to an account, please log in", "email")
+        # if User.get_by_email(form_data['email']) == True:
+        #     flash("This email is registered to an account, please log in", "email")
+        #     is_valid = False
         #first_name
-        if LETTERS_ONLY.match(fn) is False and MINIMUM_LENGTH_TWO.match(fn) is False:
+        if not LETTERS_ONLY.match(fn) and not MINIMUM_LENGTH_TWO.match(fn):
             flash("First name should be at least two characters and only include letters", "first_name")
             is_valid = False
-        elif LETTERS_ONLY.match(fn) is False and MINIMUM_LENGTH_TWO.match(fn) is True:
+        elif not LETTERS_ONLY.match(fn) and MINIMUM_LENGTH_TWO.match(fn):
             flash("First name should only include letters", "first_name")
             is_valid = False
-        elif LETTERS_ONLY.match(fn) is True and MINIMUM_LENGTH_TWO.match(fn) is False:
+        elif LETTERS_ONLY.match(fn) and not MINIMUM_LENGTH_TWO.match(fn):
             flash("First name should be two characters or longer", "first_name")
             is_valid = False
         #last_name
-        if LETTERS_ONLY.match(ln) is False and MINIMUM_LENGTH_TWO.match(ln) is False:
+        if not LETTERS_ONLY.match(ln) and not MINIMUM_LENGTH_TWO.match(ln):
             flash("Last name should be at least two characters and only include letters", "last_name")
             is_valid = False
-        elif LETTERS_ONLY.match(ln) is False and MINIMUM_LENGTH_TWO.match(ln) is True:
+        elif not LETTERS_ONLY.match(ln) and MINIMUM_LENGTH_TWO.match(ln):
             flash("Last name should only include letters", "last_name")
             is_valid = False
-        elif LETTERS_ONLY.match(ln) is True and MINIMUM_LENGTH_TWO.match(ln) is False:
+        elif LETTERS_ONLY.match(ln) and not MINIMUM_LENGTH_TWO.match(ln):
             flash("Last name should be two characters or longer", "last_name")
             is_valid = False
         #password
-        if MINIMUM_LENGTH_EIGHT.match(pw) is False and pw == pw2:
+        if not MINIMUM_LENGTH_EIGHT.match(pw) and pw == pw2:
             flash("Password must be at least 8 characters", "password")
             is_valid = False
-        elif MINIMUM_LENGTH_EIGHT.match(pw) is True and pw != pw2:
+        elif MINIMUM_LENGTH_EIGHT.match(pw) and pw != pw2:
             flash("Passwords must match!", "password")
             is_valid = False
-        elif MINIMUM_LENGTH_EIGHT.match(pw) is False and pw != pw2:
+        elif not MINIMUM_LENGTH_EIGHT.match(pw) and pw != pw2:
             flash("Passwords must be at least 8 characters and match.", "password")
             is_valid = False
         return is_valid
@@ -82,7 +83,7 @@ class User:
     @classmethod
     def add_new_user(cls, data):
         query = "INSERT INTO users (first_name, last_name, email, password) VALUES (%(first_name)s, %(last_name)s, %(email)s, %(password)s);"
-        db_result = connectToMySQL('registration').query_db(query, data) #should return the rowid as just an int
+        db_result = connectToMySQL('db1').query_db(query, data) #should return the rowid as just an int
         return db_result
 
 
@@ -92,11 +93,12 @@ class User:
         if User.validate_registration(request_form) is False:
             return False
         else:
+            hashed_pw = bcrypt.generate_password_hash(request_form['password'])
             data = {
             "first_name": request_form['first_name'],
             "last_name": request_form['last_name'],
             "email": request_form['email'],
-            "password" : bcrypt.generate_password_hash(request_form['password'])
+            "password" : hashed_pw
             }
             returned_id = User.add_new_user(data)
             user_obj = User.get_registered_user_by_id(returned_id) #connection query should return an int?
@@ -109,7 +111,7 @@ class User:
             "id": data
         }
         query = "SELECT * FROM users WHERE id = %(id)s;"
-        db_response = connectToMySQL('registration').query_db(query, dict)
+        db_response = connectToMySQL('db1').query_db(query, dict)
         user_obj = cls(db_response[0])
         return user_obj
 
@@ -117,7 +119,7 @@ class User:
     @classmethod
     def get_by_email(cls, data):
         query = "select * from users where lower(email) LIKE %(email)s;"
-        db_response = connectToMySQL('registration').query_db(query, data)
+        db_response = connectToMySQL('db1').query_db(query, data)
         print("DBResp get by email", db_response)
         if len(db_response) != 1:
             return False

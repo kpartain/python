@@ -1,4 +1,4 @@
-from flask_app.config.mysqlconnection import connectToMySQL
+from recipes_app.config.mysqlconnection import connectToMySQL
 from flask import flash
 import re
 #the hashing and validation is removed from server
@@ -28,6 +28,17 @@ class Recipe:
         self.description = data['description']
         self.instructions = data['instructions']
         self.date_made = data['date_made'] #date submitter made the recipe, NOT created to table
-        self.quick = data['quick'] #boolean T/F, T if under 30 min
+        self.quick = data['quick'] #TINYINT!! 0 = true, 1 = false
+        self.user_id = data['user_id']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
+
+    @classmethod
+    def find_all(cls):
+        query = "SELECT * FROM recipes;"
+        db_response = connectToMySQL('db1').query_db(query)
+        all_recipes = []
+        for each_response in db_response:
+            make_recipe_object = cls(each_response)
+            all_recipes.append(make_recipe_object)
+        return all_recipes
