@@ -8,9 +8,9 @@ bcrypt = Bcrypt(app)
 
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 #8 is the minimum, the 255 is the upper bound - change to DB max.
-MINIMUM_LENGTH_TWO = re.compile(r'^.{2,255}$')
-#8 is the minimum, the 255 is the upper bound - change to DB max.
-MINIMUM_LENGTH_EIGHT = re.compile(r'^.{8,255}$')
+MINIMUM_LENGTH_TWO = re.compile(r'^.{2,1000}$')
+#8 is the minimum, the 255 is the upper bound - change to DB max. 255 is safe
+MINIMUM_LENGTH_EIGHT = re.compile(r'^.{8,1000}$') #password should be 72?
 #only letters, no spaces or special characters
 LETTERS_ONLY = re.compile(r'^[a-zA-Z]+$')
 #letters and dash/hyphen/dot but NO SPACES

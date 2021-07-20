@@ -18,10 +18,47 @@
     <link rel='stylesheet' href='../static/css/style.css'>
 </head>
 <body>
-<div class="alert alert-success" role="alert">
-    {{ session['success_message'] }}
-</div>
-<h2>Welcome, you've been logged in, {{ session['user_first_name'] }}</h2>
-<a href="/logout-user">Logout</a>
+<nav class='navbar  navbar-expand-lg navbar-light bg-light'>
+    <div class='container-fluid'>
+        <!-- LEFT: Welcome Name! -->
+        <a class='navbar-brand'>Welcome{{ session['user_first_name' }} </a>
+        <!-- RIGHT: Links -->
+        <span class='d-flex p-2' action='/login' method='POST'>
+            <a href="/recipes/new">Create</a>
+            <a href="/logout-user">Logout</a>
+        </span>
+    </div>
+</nav>
+<h2>These are the recipes!</h2>
+<!-- https://getbootstrap.com/docs/5.0/content/tables/ -->
+<table class='table table-bordered table-hover'>
+    <thead class='thead-dark'>
+        <!-- header -->
+        <tr>
+        <th scope='col'>Name</th>
+        <th scope='col'>Under 30 Minutes?</th>
+        <th scope='col'>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- one row -->
+        <tr>
+            <!-- Recipe Name-->
+            <td>{{ recipe.name }}</td>
+            <!-- Recipe Time - True = yes under 30, False = no, not under 30-->
+            {% if recipe.quick %}
+                <td>Yes</td>
+            {% else %}
+                <td>No</td>
+            {% endif %}
+            <!-- Recipe links: show page, edit page, delete button-->
+            <td>
+                <a href="/recipes/{{recipe.id}}">view instructions</a> | 
+                <a href="/recipes/edit/{{recipe.id}}">edit</a> | 
+                <a href="/delete-recipe/{{recipe.id}}">delete</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
 </body>
 </html>

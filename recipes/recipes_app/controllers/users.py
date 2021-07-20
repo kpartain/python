@@ -33,7 +33,6 @@ def register_new_user():
     else: 
         session['user_first_name'] = result.first_name
         session['user_id'] = result.id
-        session['success_message'] = "You've been successfully registered!"
         return redirect('/success')
 
 @app.route('/login-existing-user-post', methods=["POST"])
@@ -45,7 +44,6 @@ def login_existing_user():
     else : 
         session['user_first_name'] = result.first_name
         session['user_id'] = result.id
-        session['success_message'] = "You've been logged in!"
         return redirect('/success')
 
 @app.route('/logout-user')
