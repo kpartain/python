@@ -67,6 +67,13 @@ class User:
             is_valid = False
         return is_valid
 
+    @classmethod
+    def add_new_user(cls, data):
+        query = "INSERT INTO users (first_name, last_name, email, password) VALUES (%(first_name)s, %(last_name)s, %(email)s, %(password)s);"
+        db_result = connectToMySQL('registration').query_db(query, data) #should return the rowid as just an int
+        return db_result
+
+
     #returns false if any errors or returns the object if registered and saved
     @classmethod
     def register_and_login(cls, request_form):
@@ -80,31 +87,10 @@ class User:
             "password" : bcrypt.generate_password_hash(request_form['password'])
             }
             returned_id = User.add_new_user(data)
-            user_obj = User.get_registered_user_by_id(returned_id['id'])
+            user_obj = User.get_registered_user_by_id(returned_id) #connection query should return an int?
             return user_obj
     
-
-    #returns false if any errors or returns the object if logged in 
-    @staticmethod
-    def validate_login(form_data):
-        is_valid = True
-        #returns false if not found, returns the object if found
-        result = User.get_by_email(form_data['login_email'])
-        if user_object is False:
-            flash("Invalid email and/or password.", "login")
-            is_valid = False
-        elif not bcrypt.check_password_hash(result.password, form_data['login_password']):
-            flash("Invalid email and/or password.", "login")
-            is_valid = False
-        if is_valid == True:
-            return result
-    
-    @classmethod
-    def add_new_user(cls, data):
-        query = "INSERT INTO users (first_name, last_name, email, password) VALUES (%(first_name)s, %(last_name)s, %(email)s, %(password)s);"
-        db_result = connectToMySQL('registration').query_db(query, data)
-        return db_result
-
+    #returns user object
     @classmethod
     def get_registered_user_by_id(cls, data):
         dict = {
@@ -127,3 +113,19 @@ class User:
             user_obj = cls(db_response[0])
             return user_obj
         
+    #returns false if any errors or returns the object if logged in 
+    @staticmethod
+    def validate_login(form_data):
+        is_valid = True
+        #returns false if not found, returns the object if found
+        result = User.get_by_email(form_data['login_email'])
+        if result is False:
+            flash("Invalid email and/or password.", "login")
+            is_valid = False
+        elif not bcrypt.check_password_hash(result.password, form_data['login_password']):
+            flash("Invalid email and/or password.", "login")
+            is_valid = False
+        if is_valid == True:
+            return result
+        else:
+            return is_valid

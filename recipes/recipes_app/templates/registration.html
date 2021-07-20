@@ -38,8 +38,11 @@
                 <!-- REGISTER -->
                 <h2>Register here!</h2>
                 <form action="/new-user-post" method="POST">
-                    <!-- TEXT INPUT -->
+                    <!-- FIRST NAME -->
                     <div>
+                        {% if len(get_flashed_messages(category_filter=['first_name'])) > 0 %}
+                            <p class="alert alert-danger">{{ get_flashed_messages(category_filter=['first_name'])[0] }}</p>
+                        {% endif % }
                         <label for="first_name">First name: </label>
                         <input
                             type="text"
@@ -47,13 +50,16 @@
                             value=""
                         /><!-- minlength="2" -->
                     </div>
-                    <!-- TEXT INPUT -->
+                    <!-- LAST NAME -->
                     <div class="mt-3">
+                        {% if len(get_flashed_messages(category_filter=['last_name'])) > 0 %}
+                            <p class="alert alert-danger">{{ get_flashed_messages(category_filter=['last_name'])[0] }}</p>
+                        {% endif % }
                         <label for="last_name">Last Name: </label>
                         <input type="text" name="last_name" value=""/>
                         <!-- minlength="2" -->
                     </div>
-                    <!-- TEXT INPUT -->
+                    <!-- EMAIL -->
                     <div class="mt-3">
                         {% if len(get_flashed_messages(category_filter=['email'])) > 0 %}
                             <p class="alert alert-danger">{{ get_flashed_messages(category_filter=['email'])[0] }}</p>
@@ -61,8 +67,11 @@
                         <label for="email">Email: </label>
                         <input type="text" name="email" value="" />
                     </div>
-                    <!-- TEXT INPUT -->
+                    <!-- PASSWORD -->
                     <div class="mt-3">
+                        {% if len(get_flashed_messages(category_filter=['password'])) > 0 %}
+                            <p class="alert alert-danger">{{ get_flashed_messages(category_filter=['password'])[0] }}</p>
+                        {% endif % }
                         <label for="password">Password: </label>
                         <input
                             type="password"
@@ -93,8 +102,8 @@
             <div class="col-4">
                 <!-- LOGIN-->
                 <h2>Login here!</h2>
-                <!-- Errors - because error for bad email/pw should be the same per 6/19-->
-                <!-- did not seperate by line, added just one spot. -->
+                <!-- Errors - because error for bad email/pw should be the same per 6/19 demo -->
+                <!-- did not seperate by line, added just one spot so unable to identify which is errant -->
                 {% if len(get_flashed_messages(category_filter=['login'])) > 0 %}
                     <p class="alert alert-danger">{{ get_flashed_messages(category_filter=['login'])[0] }}</p>
                 {% endif % }
@@ -102,7 +111,7 @@
                     <!-- TEXT INPUT -->
                     <div>
                         <label for="email">Email: </label>
-                        <input type="text" name="email" value="" />
+                        <input type="text" name="login_email" value="" />
                     </div>
                     <!-- TEXT INPUT -->
                     <div class="mt-3">
