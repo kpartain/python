@@ -7,9 +7,20 @@ from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
 
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
-LETTERS_ONLY = re.compile(r'^[a-zA-Z]+$')
-MINIMUM_LENGTH_TWO = re.compile(r'^.{2,255}$') #the 2 is the minimum, the 255 is the upper bound - change to DB max.
+#8 is the minimum, the 255 is the upper bound - change to DB max.
+MINIMUM_LENGTH_TWO = re.compile(r'^.{2,255}$')
+#8 is the minimum, the 255 is the upper bound - change to DB max.
 MINIMUM_LENGTH_EIGHT = re.compile(r'^.{8,255}$')
+#only letters, no spaces or special characters
+LETTERS_ONLY = re.compile(r'^[a-zA-Z]+$')
+#letters and dash/hyphen/dot but NO SPACES
+LETTERS_CHARS_NO_SPACE = re.compile(r'^[A-Za-z]+(((\'|\-|\.)?([A-Za-z])+))?$')
+#letters and spaces (two names with a space) and dash/hyphen/dot
+LETTERS_CHARS_SPACE = re.compile(r'^[A-Za-z]+((\s)?((\'|\-|\.)?([A-Za-z])+))*$')
+#letters and spaces but no special chars
+LETTERS_SPACE_NO_CHARS = re.compile(r'^[A-Za-z]+((\s)?([A-Za-z])+)*$')
+#to add a character (ex: underscore), change (\'|\-|\.) to (\'|\-|\.|\_) 
+
 class User:
     def __init__(self, data):
         self.id = data['id']
@@ -19,6 +30,7 @@ class User:
         self.password = data['password']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
+        self.recipes = []
 
     @staticmethod
     def validate_registration(form_data):
