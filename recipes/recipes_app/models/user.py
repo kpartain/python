@@ -1,6 +1,10 @@
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask import flash
 import re
+#the hashing and validation is removed from server
+from recipes_app import app
+from flask_bcrypt import Bcrypt
+bcrypt = Bcrypt(app)
 
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 LETTERS_ONLY = re.compile(r'^[a-zA-Z]+$')
@@ -63,41 +67,55 @@ class User:
             is_valid = False
         return is_valid
 
+    #returns false if any errors or returns the object if registered and saved
+    @classmethod
+    def register_and_login(cls, request_form):
+        if User.validate_registration(request_form) is False:
+            return False
+        else:
+            data = {
+            "first_name": request_form['first_name'],
+            "last_name": request_form['last_name'],
+            "email": request_form['email'],
+            "password" : bcrypt.generate_password_hash(request_form['password'])
+            }
+            returned_id = User.add_new_user(data)
+            user_obj = User.get_registered_user_by_id(returned_id['id'])
+            return user_obj
+    
+
+    #returns false if any errors or returns the object if logged in 
     @staticmethod
     def validate_login(form_data):
         is_valid = True
-        return is_valid
+        #returns false if not found, returns the object if found
+        result = User.get_by_email(form_data['login_email'])
+        if user_object is False:
+            flash("Invalid email and/or password.", "login")
+            is_valid = False
+        elif not bcrypt.check_password_hash(result.password, form_data['login_password']):
+            flash("Invalid email and/or password.", "login")
+            is_valid = False
+        if is_valid == True:
+            return result
     
     @classmethod
-    def register_and_login(cls, data):
-        returned_id = User.add_new_user(data)
-        print("register and login result ID", returned_id)
-        user_obj = User.get_registered_user_by_id(returned_id)
-        print("register and login result object", user_obj)
-        return user_obj
-
-    @classmethod
     def add_new_user(cls, data):
-        #save to DB with query
         query = "INSERT INTO users (first_name, last_name, email, password) VALUES (%(first_name)s, %(last_name)s, %(email)s, %(password)s);"
         db_result = connectToMySQL('registration').query_db(query, data)
-        print("Add new user result", db_result)
-        #return user ID which is returned from query
         return db_result
 
     @classmethod
     def get_registered_user_by_id(cls, data):
-        #get data from DB
         dict = {
             "id": data
         }
         query = "SELECT * FROM users WHERE id = %(id)s;"
         db_response = connectToMySQL('registration').query_db(query, dict)
         user_obj = cls(db_response[0])
-        print("get registered user obj result", user_obj)
-        #return user object to session
         return user_obj
 
+    #returns false if nothing found or returns the object
     @classmethod
     def get_by_email(cls, data):
         query = "select * from users where lower(email) LIKE %(email)s;"
@@ -106,5 +124,6 @@ class User:
         if len(db_response) != 1:
             return False
         else: 
-            return cls(db_response[0])
+            user_obj = cls(db_response[0])
+            return user_obj
         
