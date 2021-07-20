@@ -35,9 +35,9 @@ def show_dojo_and_its_ninjas(dojo_id):
     if diff.days > 0 : 
         message_for_HTML = 'more than a day ago'
     if diff.days == 0 and diff.hours > 0 : 
-        message_for_html = diff.hours, " hours ago"
+        message_for_HTML = diff.hours, " hours ago"
     if diff.days == 0 and diff.hours == 0 :
-        message_for_html = diff.minutes, " minutes ago"
+        message_for_HTML = diff.minutes, " minutes ago"
     if diff.days == 0 and diff.hours == 0 and diff.minutes == 0:
         message_for_HTML = "less than a minute ago"
     return render_template('dojo-show.html', dojo = dojo, ninjas = ninjas, diff = diff, message_for_HTML = message_for_HTML, current = current, created = created)
