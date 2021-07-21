@@ -267,11 +267,10 @@ class SLList {
                 runner.next = runner.next.next;
            }
            if(runner.next == couchPotato){
-               runner.next = null;
                break;
            } else {
-               runner = couchPotato.next.next;
                couchPotato = couchPotato.next;
+               runner = runner.next; //or couchpotato.next
            }
        }
        runner.next = null;
