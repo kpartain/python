@@ -27,7 +27,7 @@
             rel="stylesheet"
         />
         <!-- LINKED CSS PAGES -->
-        <link rel="stylesheet" href="../static/css/style.css" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -63,7 +63,7 @@
                             <p class="alert alert-danger">{{ get_flashed_messages(category_filter=['description'])[0] }}</p>
                         {% endif %}
         <label for="description">Description: </label>
-        <textarea type="text" name="description" value="{{ recipe.description }}"></textarea>
+        <textarea type="text" name="description" value="">{{recipe.description|safe}}</textarea>
     </div>
         <!-- INSTRUCTIONS -->
         <div>
@@ -71,7 +71,7 @@
                             <p class="alert alert-danger">{{ get_flashed_messages(category_filter=['instructions'])[0] }}</p>
                         {% endif %}
             <label for="comment_optional">Instructions: </label>
-            <textarea type="text" name="comment_optional" value="{{ recipe.instructions }}"></textarea>
+            <textarea type="text" name="comment_optional" value="">{{recipe.instructions|safe}}</textarea>
         </div>
                 </div>
                 <!-- RIGHT SIDE -->
@@ -96,10 +96,15 @@
                         {% if get_flashed_messages(category_filter=['quick']) %}
                             <p class="alert alert-danger">{{ get_flashed_messages(category_filter=['quick'])[0] }}</p>
                         {% endif %}
-                        <label for="quick" name="quick" value="">Under 30 minutes?</label>
-                        <span>
-                            <input name="quick" type="radio" value="1"/>Yes
+                        <label for="quick">Under 30 minutes?</label>
+                        <span class="d-flex align-items-center">
+                            {% if recipe.quick == 1 %}
+                            <input name="quick" type="radio" value="1" checked/>Yes
                             <input name="quick" type="radio" value="0"/>No
+                            {% else %}
+                            <input name="quick" type="radio" value="1"/>Yes
+                            <input name="quick" type="radio" value="0" checked/>No
+                            {% endif %}
                         </span>
                     </div>
                 </div>

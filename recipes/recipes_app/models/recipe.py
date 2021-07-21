@@ -41,10 +41,10 @@ class Recipe:
         if not MINIMUM_LENGTH_THREE.match(rn):
             flash("Recipe name should be three or more characters", "name")
             is_valid = False
-        if not MINIMUM_LENGTH_THREE.match(ds):
+        if len(ds) < 3:
             flash("Description should be three or more characters", "description")
             is_valid = False
-        if not MINIMUM_LENGTH_THREE.match(ins):
+        if len(ins) < 3:
             flash("Instructions should be three or more characters", "instructions")
             is_valid = False
         if request_form['date_made'] == "":

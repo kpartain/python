@@ -29,23 +29,36 @@
         <!-- LINKED CSS PAGES -->
         <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
     </head>
-    <body class="prp2">
-        <div class="row justify-content-around mt-5">
-            <div class="col-7 d-flex db-highlight flex-column align-content-start">
-                <div class="d-flex db-highlight flex-column">
-                    <h1 class="p-2 flex-fill prp4 mx-5">Houston, we have a problem</h1>
-                    <h2 class="p-2 flex-fill prp3 font-italic mx-5">It looks like we can't find the page you're looking for.</h2>
-                </div>
-                <img src="../static/svg/lost.svg" class="img-fluid" alt="a floating astronaut" />
+    <body>
+        <div class="d-flex justify-content-around mt-5" id="naughty-user">
+            <div class="col-4">
+                <img
+                    src="{{ url_for('static', filename='gif/magic-word.gif') }}"
+                    class="img-fluid"
+                    alt="jurassic park reference"
+                />
             </div>
-            <div class="col-5">
-                <img src="{{ url_for('static', filename='svg/lost2.svg') }}" class="img-fluid" alt="a floating astronaut" />
-            <div class="text-center d-flex justify-content-center gap-2" id="nfbuttons">
-                <a href="/success" class="btn btn-outline-light">Go Home</a>
-                <a href="/log-out-user" class="btn btn-outline-secondary">Log Out</a>
-             </div>
+            <div class="col-4">
+                <h1>Ah ah ah! You didn't say the magic word!</h1>
             </div>
-            
+        </div>
+        <div class="text-center m-3">
+            <h2>{{ session['hacker_confirmed'] }}</h2>
+                <h2>Are you trying to hack my site???</h2>
+                <br />
+                <h2>
+                    Your IP address {{ session['ip_address'] }} has been
+                    recorded.
+                </h2>
+                <br />
+                <h2>
+                    Next time you attempt an activity like this we'll log you
+                    off automatically and report your IP to authorities.
+                </h2>
+                <div class="text-center d-flex justify-content-center gap-2" id="nfbuttons">
+                    <a href="/success" class="btn btn-outline-primary">Go Home</a>
+                    <a href="/log-out-user" class="btn btn-outline-secondary">Log Out</a>
+                 </div>
         </div>
     </body>
 </html>

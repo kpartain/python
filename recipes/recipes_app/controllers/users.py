@@ -1,5 +1,6 @@
 from recipes_app import app
 from flask import render_template,redirect,request,flash, session
+import socket #this is for naughty message
 from recipes_app.models.user import User
 from recipes_app.models.recipe import Recipe
 
@@ -53,6 +54,12 @@ def login_existing_user():
     if result == False:
        return redirect('/')
     else : 
+        #computers name
+        hostname = socket.gethostname()
+        #IP address affiliated with that computer 
+        ipaddress = socket.gethostbyname(hostname)
+        session['ip_address'] = ipaddress
+        #these fields are for first name and id for generic use
         session['user_first_name'] = result.first_name
         session['user_id'] = result.id
         return redirect('/success')

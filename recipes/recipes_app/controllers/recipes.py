@@ -1,5 +1,6 @@
 from recipes_app import app
 from flask import render_template,redirect,request,flash, session
+import socket #this is for naughty message
 from recipes_app.models.user import User
 from recipes_app.models.recipe import Recipe
 
@@ -19,6 +20,7 @@ def validate_and_persist():
     print("POST SESSION INSTRUCTIONS", session['recipe_instructions'] )
     session['recipe_made_on'] = request.form['date_made']
     result = Recipe.validate_form_data(request.form)
+    print("RESULT IN VALIDATE/POST", result)
     if result == False:
         #start recipe useState
         return redirect('/recipes/new')
@@ -55,6 +57,7 @@ def display_single_recipe(recipe_id):
 
 @app.route('/recipes/edit/<id>')
 def show_edit_form(id):
+    #prevent manual navigation to this page if not logged in 
     if 'user_first_name' not in session:
         return redirect('/')
     data = {
@@ -63,6 +66,13 @@ def show_edit_form(id):
     result = Recipe.find_recipe_by_id(data)
     if result == False:
         return render_template('notfound.html')
+    elif result.user_id != session['user_id']:
+        #computers name
+        hostname = socket.gethostname()
+        #IP address affiliated with that computer 
+        ipaddress = socket.gethostbyname(hostname)
+        session['ip_address'] = ipaddress
+        return render_template('disappointed.html')
     else: 
         return render_template('recipe-edit.html', recipe = result)
 

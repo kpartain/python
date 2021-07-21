@@ -27,7 +27,7 @@
             rel="stylesheet"
         />
         <!-- LINKED CSS PAGES -->
-        <link rel="stylesheet" href="../static/css/style.css" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -62,7 +62,7 @@
         <p class="alert alert-danger">{{ get_flashed_messages(category_filter=['description'])[0] }}</p>
     {% endif %}
         <label for="description">Description: </label>
-        <textarea type="text" name="description" value=""> {{ session['recipe_description']|safe }}</textarea>
+        <textarea type="text" name="description" value=""> {{session['recipe_description']|safe}}</textarea>
     </div>
         <!-- INSTRUCTIONS -->
         <div>
@@ -70,7 +70,7 @@
                             <p class="alert alert-danger">{{ get_flashed_messages(category_filter=['instructions'])[0] }}</p>
                         {% endif %}
             <label for="instructions">Instructions: </label>
-            <textarea type="text" name="instructions" value="">{{ session['recipe_instructions']|safe }}</textarea>
+            <textarea type="text" name="instructions" value="">{{session['recipe_instructions']|safe}}</textarea>
         </div>
                 </div>
                 <!-- RIGHT SIDE -->
