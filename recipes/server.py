@@ -9,3 +9,6 @@ if __name__=="__main__":
 #pipenv shell
 #pipenv install flask-bcrypt
 #python3 server.py
+
+#AWS ******************************
+#pipenv lock -r > requirements.txt
