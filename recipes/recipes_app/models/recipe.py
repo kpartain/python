@@ -70,6 +70,6 @@ class Recipe:
 
     @classmethod
     def update_existing_recipe(cls, data):
-        query = "UPDATE recipes SET name = %(name)s, description = %(description)s, instructions = %(instructions)s, date_made = %(date_made)s, quick = %(quick)s WHERE recipies.id = %(id)s;"
+        query = "UPDATE recipes SET name = %(name)s, description = %(description)s, instructions = %(instructions)s, date_made = %(date_made)s, quick = %(quick)s WHERE id = %(id)s;"
         db_response = connectToMySQL('db1').query_db(query, data)
         return db_response
