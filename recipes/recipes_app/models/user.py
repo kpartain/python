@@ -118,10 +118,11 @@ class User:
     #returns false if nothing found or returns the object
     @classmethod
     def get_by_email(cls, data):
-        query = "select * from users where lower(email) LIKE %(email)s;"
+        query = "SELECT * FROM users WHERE users.email = %(email)s;"
         db_response = connectToMySQL('db1').query_db(query, data)
         print("DBResp get by email", db_response)
-        if len(db_response) != 1:
+        if len(db_response) == 0:
+            print("Email not found")
             return False
         else: 
             user_obj = cls(db_response[0])
@@ -132,14 +133,19 @@ class User:
     def validate_login(form_data):
         is_valid = True
         #returns false if not found, returns the object if found
-        result = User.get_by_email(form_data['login_email'])
+        data = {
+            "email" : form_data['login_email']
+        }
+        result = User.get_by_email(data)
         if result is False:
             flash("Invalid email and/or password.", "login")
             is_valid = False
-        elif not bcrypt.check_password_hash(result.password, form_data['login_password']):
-            flash("Invalid email and/or password.", "login")
-            is_valid = False
-        if is_valid == True:
-            return result
-        else:
-            return is_valid
+            return False
+        else :
+            if not bcrypt.check_password_hash(result.password, form_data['login_password']):
+                flash("Invalid email and/or password.", "login")
+                is_valid = False
+            if is_valid == True:
+                return result
+            else:
+                return is_valid

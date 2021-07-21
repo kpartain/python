@@ -11,14 +11,17 @@ def register_or_login():
     if 'last_name' not in session:
         session['last_name'] = ""
     if 'email' not in session:
-        session['email'] = "request.form['email']"
-    return render_template('registration.html')
+        session['email'] = ""
+    if 'user_first_name' not in session:
+        return render_template('registration.html')
+    else:
+        return redirect('/success')
 
 @app.route('/success')
 def redirect_success():
     #if someone manually navigated here and isn't actually logged in
     #note we use 'user_first_name' not first_name from UseState from registration
-    if session['user_first_name'] == "":
+    if 'user_first_name' not in session:
         return redirect('/')
     else:
         all_recipes = Recipe.find_all()

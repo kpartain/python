@@ -1,3 +1,4 @@
+from flask.globals import request
 from recipes_app.config.mysqlconnection import connectToMySQL
 from flask import flash
 import re
@@ -37,14 +38,17 @@ class Recipe:
         rn = request_form['name']
         ds = request_form['description']
         ins = request_form['instructions']
-        if not MINIMUM_LENGTH_THREE(rn):
+        if not MINIMUM_LENGTH_THREE.match(rn):
             flash("Recipe name should be three or more characters", "name")
             is_valid = False
-        if not MINIMUM_LENGTH_THREE(ds):
+        if not MINIMUM_LENGTH_THREE.match(ds):
             flash("Description should be three or more characters", "description")
             is_valid = False
-        if not MINIMUM_LENGTH_THREE(ins):
+        if not MINIMUM_LENGTH_THREE.match(ins):
             flash("Instructions should be three or more characters", "instructions")
+            is_valid = False
+        if request_form['date_made'] == "":
+            flash("Please select a date made", "date_made")
             is_valid = False
         return is_valid
 
@@ -58,8 +62,14 @@ class Recipe:
     def find_recipe_by_id(cls, data):
         query = "SELECT * FROM recipes WHERE recipes.id = %(id)s;"
         db_response = connectToMySQL('db1').query_db(query, data)
-        if len(db_response != 1):
+        if db_response is False:
             return False
         else:
             recipe_object = cls(db_response[0])
             return recipe_object        
+
+    @classmethod
+    def update_existing_recipe(cls, data):
+        query = "UPDATE recipes SET name = %(name)s, description = %(description)s, instructions = %(instructions)s, date_made = %(date_made)s, quick = %(quick)s WHERE recipies.id = %(id)s;"
+        db_response = connectToMySQL('db1').query_db(query, data)
+        return db_response
