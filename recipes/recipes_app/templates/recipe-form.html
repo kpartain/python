@@ -45,34 +45,40 @@
         <!-- margin/spacing: https://getbootstrap.com/docs/5.0/utilities/spacing/ -->
         <form action="/add-new-recipe-post" method="POST">
             <div class="row justify-content-around no-gutters mt-5">
+                
                 <!-- LET SIDE -->
                 <div class="col-4">
                     <!-- No hidden input for user ID - we will use session to persist -->
+
                     <!-- RECIPE NAME INPUT -->
                     <div>
                         {% if get_flashed_messages(category_filter=['name']) %}
                             <p class="alert alert-danger">{{ get_flashed_messages(category_filter=['name'])[0] }}</p>
                         {% endif %}
-                        <label for="name">Name: </label>
+                        <label for="name">Name: </label><br>
                         <input type="text" name="name" value="{{ session['recipe_name'] }}" />
                     </div>
-                        <!-- DESCRIPTION -->
-    <div>
-        {% if get_flashed_messages(category_filter=['description']) %}
-        <p class="alert alert-danger">{{ get_flashed_messages(category_filter=['description'])[0] }}</p>
-    {% endif %}
-        <label for="description">Description: </label>
-        <textarea type="text" name="description" value=""> {{session['recipe_description']|safe}}</textarea>
-    </div>
-        <!-- INSTRUCTIONS -->
-        <div>
-            {% if get_flashed_messages(category_filter=['instructions']) %}
-                            <p class="alert alert-danger">{{ get_flashed_messages(category_filter=['instructions'])[0] }}</p>
-                        {% endif %}
-            <label for="instructions">Instructions: </label>
-            <textarea type="text" name="instructions" value="">{{session['recipe_instructions']|safe}}</textarea>
-        </div>
+
+                    <!-- DESCRIPTION -->
+                    <div class="w-100">
+                        {% if get_flashed_messages(category_filter=['description']) %}
+                        <p class="alert alert-danger">{{ get_flashed_messages(category_filter=['description'])[0] }}</p>
+                    {% endif %}
+                        <label for="description">Description: </label><br>
+                        <textarea type="text" name="description" value="" class="w-100"> {{session['recipe_description']|safe}}</textarea>
+                    </div>
+
+                    <!-- INSTRUCTIONS -->
+                    <div class="w-100">
+                        {% if get_flashed_messages(category_filter=['instructions']) %}
+                                        <p class="alert alert-danger">{{ get_flashed_messages(category_filter=['instructions'])[0] }}</p>
+                                    {% endif %}
+                        <label for="instructions">Instructions: </label>
+                        <textarea type="text" name="instructions" value="" class="w-100">{{session['recipe_instructions']|safe}}</textarea>
+
+                    </div>
                 </div>
+
                 <!-- RIGHT SIDE -->
                 <div class="col-4">
                     <!-- Date Made: Jan 2, 1903 is world's oldest person's bday -->
@@ -96,20 +102,22 @@
                             <p class="alert alert-danger">{{ get_flashed_messages(category_filter=['quick'])[0] }}</p>
                         {% endif %}
                         <label for="quick">Under 30 minutes?</label>
-                        <span class="d-flex align-items-center">
+                        <span class="d-flex  justify-content-around">
                             <input name="quick" type="radio" value="1"/>Yes
                             <input name="quick" type="radio" value="0" checked/>No
                         </span>
                     </div>
                 </div>
             </div>
+
             <!-- BUTTONS -->
             <div class="mx-5 mt-3">
-                <button class="btn btn-success mx-3" type="submit">Add Recipe</button>
+                <button class="btn btn-success mx-4" type="submit">Add Recipe</button>
                 <button class="btn btn-outline-secondary" type="reset">
                     Clear
                 </button>
             </div>
+
         </form>
     </body>
 </html>

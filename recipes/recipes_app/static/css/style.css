@@ -10,9 +10,9 @@
     box-sizing: border-box;
     font-family: 'Montserrat', sans-serif;
 }
-input {
+/* input {
     width:100%;
-}
+} */
 .prp4 {
     color: var(--p4);
 }
@@ -24,4 +24,13 @@ input {
 }
 #nfbuttons a {
     font-size: 3vh;
+}
+#naughty-user > * {
+    color: var(--p4)
+}
+#first-child {
+    background-color: white;
+    background: -webkit-linear-gradient(var(--p4), var(--p3));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }

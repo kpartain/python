@@ -31,13 +31,13 @@
     </nav>
     <h2 class="mx-3 mt-4">{{recipe.name}}</h2>
     <div class="border d-flex mx-3 mt-4">
-        <div class="flex-2">
+        <div class="flex-2 mx-2 mt-2">
             <p>Description:</p>
             <p>Under 30 minutes:</p>
             <p>Instructions:</p>
             <p>Date Made:</p>
         </div>
-        <div class="flex-4 mx-3 mb-4">
+        <div class="flex-4 mx-3 mb-4 mt-2">
             <p>{{ recipe.description }}</p>
             {% if recipe.quick == 1 %}
                 <p>Yes</p>

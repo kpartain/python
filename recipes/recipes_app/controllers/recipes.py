@@ -8,7 +8,6 @@ from recipes_app.models.recipe import Recipe
 def add_a_recipe(): 
     if 'user_first_name' not in session:
         return redirect('/')
-    print("SESSION INSTRUCTIONS", session['recipe_instructions'])
     return render_template('recipe-form.html')
 
 @app.route('/add-new-recipe-post', methods=['POST'])

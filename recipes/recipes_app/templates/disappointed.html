@@ -29,8 +29,8 @@
         <!-- LINKED CSS PAGES -->
         <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
     </head>
-    <body>
-        <div class="d-flex justify-content-around mt-5" id="naughty-user">
+    <body id="naughty-user">
+        <div class="d-flex justify-content-around mt-5 align-items-center" id="first-child" >
             <div class="col-4">
                 <img
                     src="{{ url_for('static', filename='gif/magic-word.gif') }}"
@@ -47,7 +47,7 @@
                 <h2>Are you trying to hack my site???</h2>
                 <br />
                 <h2>
-                    Your IP address {{ session['ip_address'] }} has been
+                    Your IP address <b><i>{{ session['ip_address'] }}</i></b> has been
                     recorded.
                 </h2>
                 <br />

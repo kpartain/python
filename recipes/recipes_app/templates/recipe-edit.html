@@ -33,7 +33,7 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
                 <!-- LEFT: Welcome Name! -->
-                <a class="navbar-brand">Add New Recipe</a>
+                <a class="navbar-brand">Edit Recipe</a>
                 <!-- RIGHT: Links -->
                 <span class="d-flex p-2 gap-3" action="/login" method="POST">
                     <a href="/success">Dashboard</a>
@@ -45,35 +45,40 @@
         <!-- margin/spacing: https://getbootstrap.com/docs/5.0/utilities/spacing/ -->
         <form action="/edit-recipe-post" method="POST">
             <div class="row justify-content-around no-gutters mt-5">
+                
                 <!-- LET SIDE -->
-                <div class="col-4">
+                <div class="col-5">
                     <!-- RECIPE ID HIDDEN INPUT -->
                     <input type="hidden" value="{{ recipe.id }}" name="id">
+
                     <!-- RECIPE NAME INPUT -->
                     <div>
                         {% if get_flashed_messages(category_filter=['name']) %}
                             <p class="alert alert-danger">{{ get_flashed_messages(category_filter=['name'])[0] }}</p>
                         {% endif %}
-                        <label for="name">Name: </label>
-                        <input type="text" name="name" value="{{ recipe.name }}" />
+                        <label for="name">Name: </label><br>
+                        <input type="text" name="name" value="{{ recipe.name }}"/>
                     </div>
-                        <!-- DESCRIPTION -->
-    <div>
-        {% if get_flashed_messages(category_filter=['description']) %}
+
+                    <!-- DESCRIPTION -->
+                    <div class="w-100">
+                        {% if get_flashed_messages(category_filter=['description']) %}
                             <p class="alert alert-danger">{{ get_flashed_messages(category_filter=['description'])[0] }}</p>
                         {% endif %}
-        <label for="description">Description: </label>
-        <textarea type="text" name="description" value="">{{recipe.description|safe}}</textarea>
-    </div>
-        <!-- INSTRUCTIONS -->
-        <div>
-            {% if get_flashed_messages(category_filter=['instructions']) %}
+                        <label for="description">Description: </label><br>
+                        <textarea type="text" name="description" value="" class="w-100">{{recipe.description|safe}}</textarea>
+                    </div>
+
+                    <!-- INSTRUCTIONS -->
+                    <div class="w-100">
+                        {% if get_flashed_messages(category_filter=['instructions']) %}
                             <p class="alert alert-danger">{{ get_flashed_messages(category_filter=['instructions'])[0] }}</p>
                         {% endif %}
-            <label for="comment_optional">Instructions: </label>
-            <textarea type="text" name="comment_optional" value="">{{recipe.instructions|safe}}</textarea>
-        </div>
+                        <label for="comment_optional">Instructions: </label>
+                        <textarea type="text" name="comment_optional" value="" class="w-100">{{recipe.instructions|safe}}</textarea>
+                    </div>
                 </div>
+
                 <!-- RIGHT SIDE -->
                 <div class="col-4">
                     <!-- Date Made: Jan 2, 1903 is world's oldest person's bday -->
@@ -92,12 +97,12 @@
                     </div>
 
                     <!-- Under 30 Minutes Radio 0=No/False, 1=Yes/True-->
-                    <div>
+                    <div class="mt-3">
                         {% if get_flashed_messages(category_filter=['quick']) %}
                             <p class="alert alert-danger">{{ get_flashed_messages(category_filter=['quick'])[0] }}</p>
                         {% endif %}
                         <label for="quick">Under 30 minutes?</label>
-                        <span class="d-flex align-items-center">
+                        <span class="d-flex align-items-center justify-content-around">
                             {% if recipe.quick == 1 %}
                             <input name="quick" type="radio" value="1" checked/>Yes
                             <input name="quick" type="radio" value="0"/>No
@@ -109,13 +114,15 @@
                     </div>
                 </div>
             </div>
+
             <!-- BUTTONS -->
-            <div class="mt-3">
-                <button class="btn btn-success" type="submit">Login</button>
+            <div class="mt-3 mx-5">
+                <button class="btn btn-success mx-3" type="submit">Login</button>
                 <button class="btn btn-outline-secondary" type="reset">
                     Clear
                 </button>
             </div>
+
         </form>
     </body>
 </html>

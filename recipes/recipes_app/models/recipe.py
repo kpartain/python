@@ -62,7 +62,7 @@ class Recipe:
     def find_recipe_by_id(cls, data):
         query = "SELECT * FROM recipes WHERE recipes.id = %(id)s;"
         db_response = connectToMySQL('db1').query_db(query, data)
-        if db_response is False:
+        if len(db_response) is 0 or db_response is False:
             return False
         else:
             recipe_object = cls(db_response[0])
