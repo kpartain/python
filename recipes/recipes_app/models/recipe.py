@@ -6,20 +6,8 @@ from recipes_app import app
 from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
 
-EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
-#8 is the minimum, the 255 is the upper bound - change to DB max.
-MINIMUM_LENGTH_TWO = re.compile(r'^.{2,1000}$')
-#8 is the minimum, the 255 is the upper bound - change to DB max. 255 is safe
-MINIMUM_LENGTH_EIGHT = re.compile(r'^.{8,1000}$') #password should be 72?
+MINIMUM_LENGTH_THREE = re.compile(r'^.{3,1000}$') #password should be 72?
 #only letters, no spaces or special characters
-LETTERS_ONLY = re.compile(r'^[a-zA-Z]+$')
-#letters and dash/hyphen/dot but NO SPACES
-LETTERS_CHARS_NO_SPACE = re.compile(r'^[A-Za-z]+(((\'|\-|\.)?([A-Za-z])+))?$')
-#letters and spaces (two names with a space) and dash/hyphen/dot
-LETTERS_CHARS_SPACE = re.compile(r'^[A-Za-z]+((\s)?((\'|\-|\.)?([A-Za-z])+))*$')
-#letters and spaces but no special chars
-LETTERS_SPACE_NO_CHARS = re.compile(r'^[A-Za-z]+((\s)?([A-Za-z])+)*$')
-#to add a character (ex: underscore), change (\'|\-|\.) to (\'|\-|\.|\_) 
 
 class Recipe:
     def __init__(self, data):
@@ -42,3 +30,20 @@ class Recipe:
             make_recipe_object = cls(each_response)
             all_recipes.append(make_recipe_object)
         return all_recipes
+
+    @classmethod
+    def validate_form_data(cls, request_form):
+        is_valid = True
+        rn = request_form['name']
+        ds = request_form['description']
+        ins = request_form['instructions']
+        if not MINIMUM_LENGTH_THREE(rn):
+            flash("Recipe name should be three or more characters", "name")
+            is_valid = False
+        if not MINIMUM_LENGTH_THREE(ds):
+            flash("Description should be three or more characters", "description")
+            is_valid = False
+        if not MINIMUM_LENGTH_THREE(ins):
+            flash("Instructions should be three or more characters", "instructions")
+            is_valid = False
+        
