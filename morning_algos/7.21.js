@@ -276,12 +276,35 @@ class SLList {
        runner.next = null;
        return this;
     }
+
+    breakcirc2(){
+        var walker = this.head;
+        var runner = this.head.next
+        while (walker != runner) {
+            if(runner == null || runner.next == null) {
+                return this
+            }
+            walker = walker.next
+            runner = runner.next.next
+        }
+        walker = this.head
+        while (runner.next != walker) {
+            walker = walker.next
+            runner = runner.next
+        }
+        runner.next = null
+        return this
+    }
     printAll() {
-        var string = "Current: ";
+        var string = "Current: "
         var potato = this.head;
-        while (potato != null) {
-            string += potato.value + ", ";
+        while (potato.next != null) {
+            string += potato.value + ", "; 
             potato = potato.next;
+            if(potato.next == null) {
+                string += potato.value + " END"
+            }
+            
         }
         console.log(string);
     }
@@ -293,7 +316,7 @@ list1.addToBack(1).addToBack(2).addToBack(3).addToBack(4);
 list1.head.next.next.next.next = list1.head.next;
 console.log(list1.isCircular())
 console.log(list1)
-list1.breakCircle()
+list1.breakcirc2()
 console.log(list1.isCircular())
 console.log(list1)
 list1.printAll()
