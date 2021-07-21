@@ -22,7 +22,7 @@ def redirect_success():
         return redirect('/')
     else:
         all_recipes = Recipe.find_all()
-        return render_template("success.html")
+        return render_template("success.html", all_recipes = all_recipes)
 
 @app.route('/new-user-post', methods=["GET", "POST"])
 def register_new_user():
