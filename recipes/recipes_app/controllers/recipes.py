@@ -26,12 +26,12 @@ def validate_and_persist():
         session['recipe_made_on'] = request.form['date_made']
         #persist the recipe
         data = {
-            "user_id": request.form['user_id'],
+            "user_id": session['user_id'],
             "name": request.form['name'],
             "description": request.form['description'],
             "instructions": request.form['instructions'],
             "date_made" : request.form['date_made'],
             "quick": request.form['quick']
         }
-        returned_id = Recipe.persist(data)
+        returned_id = Recipe.persist_new_recipe(data)
         return redirect('/success')

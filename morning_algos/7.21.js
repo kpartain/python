@@ -254,23 +254,37 @@ class SLList {
 
     breakCircle() {
         //if someone ran this on a non-circle, return false
-        if(this.isCircular() == false){
-            return false;
+       if(this.head == null || this.head.next == null || this.head.next.next == null ){
+           return False;
+       }
+       var couchPotato = this.head;
+       var runner = this.head.next;
+       while(runner.next != couchPotato){
+           while (runner.next != runner) {
+               if(runner.next == runner) {
+                   break;
+                }
+                runner.next = runner.next.next;
+           }
+           if(runner.next == couchPotato){
+               runner.next = null;
+               break;
+           } else {
+               runner = couchPotato.next.next;
+               couchPotato = couchPotato.next;
+           }
+       }
+       runner.next = null;
+       return this;
+    }
+    printAll() {
+        var string = "Current: ";
+        var potato = this.head;
+        while (potato != null) {
+            string += potato.value + ", ";
+            potato = potato.next;
         }
-        if(this.head == null) {
-            return false;
-        }
-        var startOfCircle = this.head; //cap
-        var runner = this.head; //sam
-        while(startOfCircle != null && startOfCircle.next != null && startOfCircle.next.next) {
-            startOfCircle = startOfCircle.next.next;
-            runner = runner.next;
-            if(startOfCircle == runner.next) {
-                runner.next = null;
-                return this;
-            }
-        }
-        return this;
+        console.log(string);
     }
 }
 
@@ -279,5 +293,8 @@ var list1 = new SLList();
 list1.addToBack(1).addToBack(2).addToBack(3).addToBack(4);
 list1.head.next.next.next.next = list1.head.next;
 console.log(list1.isCircular())
+console.log(list1)
 list1.breakCircle()
 console.log(list1.isCircular())
+console.log(list1)
+list1.printAll()

@@ -47,12 +47,7 @@
             <div class="row justify-content-around no-gutters mt-5">
                 <!-- LET SIDE -->
                 <div class="col-4">
-                    <!-- Hidden Input for the Recipe's user_id - should be submitters ID -->
-                    <input
-                        type="hidden"
-                        name="user_id"
-                        value="{{ session['user_id'] }}"
-                    />
+                    <!-- No hidden input for user ID - we will use session to persist -->
                     <!-- RECIPE NAME INPUT -->
                     <div>
                         <label for="name">Name: </label>

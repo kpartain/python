@@ -46,4 +46,20 @@ class Recipe:
         if not MINIMUM_LENGTH_THREE(ins):
             flash("Instructions should be three or more characters", "instructions")
             is_valid = False
-        
+        return is_valid
+
+    @classmethod
+    def persist_new_recipe(cls, data):
+        query = "INSERT INTO recipes (name, description, instructions, date_made, quick, user_id) VALUES (%(name)s, %(description)s, %(instructions)s, %(date_made)s, %(quick)s, %(user_id)s);"
+        returned_id = connectToMySQL('db1').query_db(query, data)
+        return returned_id
+
+    @classmethod
+    def find_recipe_by_id(cls, data):
+        query = "SELECT * FROM recipes WHERE recipes.id = %(id)s;"
+        db_response = connectToMySQL('db1').query_db(query, data)
+        if len(db_response != 1):
+            return False
+        else:
+            recipe_object = cls(db_response[0])
+            return recipe_object        
