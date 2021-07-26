@@ -21,7 +21,7 @@
 // n * n-1 until n is 1
 //n should never hit 0 as n*0 = 0
 function factorial(num){
-    if(num == 0 || num == 1){
+    if(num <= 1){
         return num 
     } else {
         return num * factorial(num - 1);
