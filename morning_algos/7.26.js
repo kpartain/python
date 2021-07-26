@@ -40,7 +40,7 @@ console.log("5:",factorial(5))
 function findNthFibNum(n) {
     if(n <= 1) {
         return 0;
-    } else if (n < 4) {
+    } else if (n == 2) {
         return 1;
     } else {
         return (findNthFibNum(n - 1) + findNthFibNum(n -2));
