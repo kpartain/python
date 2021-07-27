@@ -23,15 +23,16 @@ function binarySearch(sortedNums, searchNum) {
   }
   // RECURSIVE CALL
   //if the index at the middle is greater than the search
-  if(sortedNums[middleIndex] > searchNum){
+  if(sortedNums[middleIndex] > searchNum){ //if the value of the middle index is higher than search value
       //go backwards by using this function on a "new" array that ends at our prior middle
       //since we know the array is sorted, we don't need any value after the prior middle
       while(sortedNums.includes(sortedNums[middleIndex])){
           sortedNums.pop();
       }
       return binarySearch(sortedNums, searchNum)
-  } else {
-      //go forwards - if the immediate next value is higher than search, return false since it is sorted
+  } else { //if the value of the middle index is less than the search value, search value SHOULD be to the right.
+      //go forwards - 
+      //if the immediate next value is higher than search, return false since it is sorted and that means the right side doesn't have it
       if(sortedNums[middleIndex] + 1 > searchNum) {
         return false;
       }
@@ -42,9 +43,7 @@ function binarySearch(sortedNums, searchNum) {
         }
         return binarySearch(sortedNums, searchNum) 
       }
-      
   }
-  return false;
 }
 
 const nums1 = [1, 3, 5, 6];
