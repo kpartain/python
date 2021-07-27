@@ -22,18 +22,27 @@ function binarySearch(sortedNums, searchNum) {
       return true;
   }
   // RECURSIVE CALL
+  //if the index at the middle is greater than the search
   if(sortedNums[middleIndex] > searchNum){
-      //go backwards
+      //go backwards by using this function on a "new" array that ends at our prior middle
+      //since we know the array is sorted, we don't need any value after the prior middle
       while(sortedNums.includes(sortedNums[middleIndex])){
           sortedNums.pop();
       }
       return binarySearch(sortedNums, searchNum)
   } else {
-      //go forwards
-      while(sortedNums.includes(sortedNums[middleIndex])){
-          sortedNums.shift();
+      //go forwards - if the immediate next value is higher than search, return false since it is sorted
+      if(sortedNums[middleIndex] + 1 > searchNum) {
+        return false;
       }
-      return binarySearch(sortedNums, searchNum)
+      else {
+          //start the recursion with the array starting at the middle part 
+         while(sortedNums.includes(sortedNums[middleIndex])){
+          sortedNums.shift();
+        }
+        return binarySearch(sortedNums, searchNum) 
+      }
+      
   }
   return false;
 }
