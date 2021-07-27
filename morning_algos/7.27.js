@@ -7,7 +7,7 @@
   Take the middle item and compare it to the given value.
   Based on that comparison, narrow your search to a particular section of the array
 */
-
+// function binarySearch(sortedNums, searchNum, leftIndex, rightIndex) {
 function binarySearch(sortedNums, searchNum) {
   var lastIndex = sortedNums.length - 1
   // BASE CASE
