@@ -298,20 +298,27 @@ class SLList {
         return lastNode;
     }
 
-    reverse(lastNode) {
+    reverse() {
     //edge cases
         //if list is empty
         if(this.head == null || this.head.next == null) {
             return this;
         }
-        console.log("LAST NODE/START OF FUNCTION", lastNode)
     //standard cases
-        if(this.head != lastNode) {
-            this.head.next.next = this.head;
-            this.head.next = null;
-            return this.reverse(lastNode);
+        var leftNode = null;
+        var middleNode = this.head;
+        var rightNode = this.head.next;
+        while(middleNode.next != null) {
+            middleNode.next = leftNode;
+            leftNode = middleNode;
+            middleNode = rightNode;
+            rightNode = rightNode.next;
         }
+        this.head = middleNode;
+        middleNode.next = leftNode;
+        return this;
     }
+        
         
 }
 
@@ -322,6 +329,5 @@ testlist.addToBack(5).addToBack(4).addToBack(3).addToBack(2).addToBack(1);
 console.log("****BEFORE****")
 testlist.printAll()
 console.log("****AFTER****")
-var lastNode = testlist.findLastNode()
-testlist.reverse(lastNode)
+testlist.reverse()
 testlist.printAll()
