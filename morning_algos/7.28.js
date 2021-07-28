@@ -304,21 +304,13 @@ class SLList {
         if(this.head == null || this.head.next == null) {
             return this;
         }
+        console.log("LAST NODE/START OF FUNCTION", lastNode)
     //standard cases
         if(this.head != lastNode) {
-            var currentHead = this.head;
-            var previous = null;
-            var tempNode = currentHead.next;
-            console.log("Inside while, temp node", tempNode)
-            currentHead.next = previous;
-            console.log("Inside while, currentHead.next", currentHead.next)
-            previous = currentHead;
-            console.log("Inside while, previous", currentHead)
-            currentHead = tempNode;
-            console.log("Inside while, currenthead", currentHead)
+            this.head.next.next = this.head;
+            this.head.next = null;
             return this.reverse(lastNode);
         }
-        return this;
     }
         
 }
