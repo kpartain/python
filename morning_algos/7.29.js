@@ -97,20 +97,20 @@ console.log(test5);
  * @param {string} str The string containing to expand.
  * @returns {Array<string>} The expanded versions of the given string.
  */
-function binaryStringExpansion(str, returnArray = [], currentStr = str) {
-    if(str.length == 0) {
-        return false;
-    } else {
-        for(var i = 0; i < currentStr.length; i++) {
-            if(currentStr[i] == "?") {
-                currentStr[i] = 1;
-            }
-        }
-        return binaryStringExpansion(str, returnArray, currentStr)
-    }
-    return returnArray;
-}
-const str1 = "1?0?";
-const expectedResult = ["1000", "1001", "1100", "1101"];
-var theResult = binaryStringExpansion(str1)
-console.log(theResult)
+// function binaryStringExpansion(str, returnArray = [], currentStr = str) {
+//     if(str.length == 0) {
+//         return false;
+//     } else {
+//         for(var i = 0; i < currentStr.length; i++) {
+//             if(currentStr[i] == "?") {
+//                 currentStr[i] = 1;
+//             }
+//         }
+//         return binaryStringExpansion(str, returnArray, currentStr)
+//     }
+//     return returnArray;
+// }
+// const str1 = "1?0?";
+// const expectedResult = ["1000", "1001", "1100", "1101"];
+// var theResult = binaryStringExpansion(str1)
+// console.log(theResult)
