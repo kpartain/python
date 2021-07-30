@@ -40,7 +40,6 @@ function lowestCommonMult(a, b, largestPlusLargest = 0) {
     }
     largestPlusLargest += largest;
     if(largestPlusLargest % smallest != 0) {
-        largestPlusLargest += largest;
         return lowestCommonMult(a, b, largestPlusLargest)
     } else {
        return largestPlusLargest 
@@ -66,8 +65,8 @@ const expected3 = 10;
 var test3 = lowestCommonMult(num3A, num3B);
 console.log(test3);
 
-const num4A = 6;
-const num4B = 8;
+const num4A = 6; // 6, 12, 18, 24
+const num4B = 8; // 8, 16, 24
 const expected4 = 24;
 var test4 = lowestCommonMult(num4A, num4B);
 console.log(test4);
