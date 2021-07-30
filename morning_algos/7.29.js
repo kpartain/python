@@ -47,20 +47,20 @@ function lowestCommonMult(a, b, largestPlusLargest = 0) {
     
 }
 
-const num1A = 1;
-const num1B = 1;
+const num1A = 1; //1
+const num1B = 1; //1
 const expected1 = 1;
 var test1 = lowestCommonMult(num1A, num1B);
 console.log(test1);
 
-const num2A = 5;
-const num2B = 10;
+const num2A = 5; //5, 10, 15, 20
+const num2B = 10; //10, 20, 30
 const expected2 = 10;
 var test2 = lowestCommonMult(num2A, num2B);
 console.log(test2);
 
-const num3A = 10;
-const num3B = 5;
+const num3A = 10; //10, 20, 30
+const num3B = 5; //5, 10, 15, 20
 const expected3 = 10;
 var test3 = lowestCommonMult(num3A, num3B);
 console.log(test3);
@@ -71,8 +71,8 @@ const expected4 = 24;
 var test4 = lowestCommonMult(num4A, num4B);
 console.log(test4);
 
-const num5A = 15;
-const num5B = 25;
+const num5A = 15; //15, 30, 45, 60, 75
+const num5B = 25; //24, 50, 75
 const expected5 = 75;
 var test5 = lowestCommonMult(num5A, num5B);
 console.log(test5);
@@ -97,13 +97,20 @@ console.log(test5);
  * @param {string} str The string containing to expand.
  * @returns {Array<string>} The expanded versions of the given string.
  */
-// function binaryStringExpansion(str) {
-//     if(str.length == 0) {
-//         return false;
-//     }
-//     var returnArray = [];
-// }
-// const str1 = "1?0?";
-// const expectedResult = ["1000", "1001", "1100", "1101"];
-// var theResult = binaryStringExpansion(str1)
-// console.log(theResult)
+function binaryStringExpansion(str, returnArray = [], currentStr = str) {
+    if(str.length == 0) {
+        return false;
+    } else {
+        for(var i = 0; i < currentStr.length; i++) {
+            if(currentStr[i] == "?") {
+                currentStr[i] = 1;
+            }
+        }
+        return binaryStringExpansion(str, returnArray, currentStr)
+    }
+    return returnArray;
+}
+const str1 = "1?0?";
+const expectedResult = ["1000", "1001", "1100", "1101"];
+var theResult = binaryStringExpansion(str1)
+console.log(theResult)
